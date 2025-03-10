@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
 import { redirect } from 'next/navigation'
-import pathsConfig from "@/utils/paths/paths.config"
+import paths from "@/utils/paths/paths.config"
 
 const signInSchema = z.object({
     email: z.string().email(),
@@ -34,7 +34,7 @@ export default function SignInForm() {
         } catch (error) {
             if (error instanceof Error) toast.error(error.message)
         } finally {
-            redirect(pathsConfig.app.home)
+            redirect(paths.app.home)
         }
     }
 

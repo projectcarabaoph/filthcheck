@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { signUpWithPassword } from '@/app/auth/actions'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
-import pathsConfig from '@/utils/paths/paths.config'
+import paths from '@/utils/paths/paths.config'
 import Link from 'next/link'
 
 
@@ -53,7 +53,7 @@ export default function SignUpForm() {
                 <Button className="bg-slate-400 hover:bg-slate-400/90" type="submit">Sign Up</Button>
             </form>
             <div>
-                <Link href={pathsConfig.auth.signIn} className='flex gap-2'>
+                <Link href={paths.auth.signIn} className='flex gap-2'>
                     <small>Already have an account?</small>
                     <small className='hover:text-purple-500 hover:font-bold'>Sign In</small>
                 </Link>

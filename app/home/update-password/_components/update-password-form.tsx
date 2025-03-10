@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { updatePassword } from '@/app/home/update-password/actions'
-import pathsConfig from '@/utils/paths/paths.config'
+import paths from '@/utils/paths/paths.config'
 
 const updatePasswordSchema = z.object({
     password: z.string().min(6),
@@ -35,7 +35,7 @@ const UpdatePasswordForm = () => {
         } catch (error) {
             if (error instanceof Error) toast.error(error.message)
         } finally {
-            redirect(pathsConfig.app.home)
+            redirect(paths.app.home)
         }
 
     }

@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { serverClient } from '@/utils/supabase/server-client'
-import pathsConfig from '@/utils/paths/paths.config'
+import paths from '@/utils/paths/paths.config'
 import { clientKeys } from '@/utils/supabase/client-keys'
 import type { TSignInWithPassword, TSignUpWithPassword } from '@/app/auth/_types'
 
@@ -13,7 +13,7 @@ export const signInWithOAuth = async (provider: "google") => {
     const response = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-            redirectTo: `${keys.devBaseURL}${pathsConfig.auth.callback}`
+            redirectTo: `${keys.devBaseURL}${paths.auth.callback}`
         }
     })
 
@@ -43,7 +43,7 @@ export const signUpWithPassword = async ({ email, password, fullname }: TSignUpW
             data: {
                 full_name: fullname,
             },
-            emailRedirectTo: `${keys.devBaseURL}${pathsConfig.auth.callback}`
+            emailRedirectTo: `${keys.devBaseURL}${paths.auth.callback}`
         },
     })
 
@@ -62,7 +62,7 @@ export const forgotPassword = async (email: string) => {
     const supabase = await serverClient()
     const keys = clientKeys()
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${keys.devBaseURL}${pathsConfig.app.updatePassword}`
+        redirectTo: `${keys.devBaseURL}${paths.app.updatePassword}`
     })
     if (error) throw new Error(error.message);
     return data

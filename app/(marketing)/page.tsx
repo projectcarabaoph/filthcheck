@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import pathsConfig from '@/utils/paths/paths.config'
+import paths from '@/utils/paths/paths.config'
 type TNavLinks = {
     id: number;
     href: string;
@@ -10,17 +10,17 @@ const Marketing = () => {
 
         {
             id: 1,
-            href: pathsConfig.auth.signIn,
+            href: paths.auth.signIn,
             label: 'Sign In',
         },
         {
             id: 2,
-            href: pathsConfig.auth.signUp,
+            href: paths.auth.signUp,
             label: 'Sign Up',
         },
         {
             id: 3,
-            href: pathsConfig.auth.forgotPassword,
+            href: paths.auth.forgotPassword,
             label: 'Forgot Password',
         },
     ]
