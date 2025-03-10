@@ -1,0 +1,1 @@
+Simple NextJS Supabase Starter for my personal projects

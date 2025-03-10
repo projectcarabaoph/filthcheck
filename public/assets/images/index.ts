@@ -1,0 +1,1 @@
+export { default as avatarHolder } from '@/public/assets/images/avatar-holder.png';
