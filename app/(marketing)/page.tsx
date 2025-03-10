@@ -13,16 +13,6 @@ const Marketing = () => {
             href: paths.auth.signIn,
             label: 'Sign In',
         },
-        {
-            id: 2,
-            href: paths.auth.signUp,
-            label: 'Sign Up',
-        },
-        {
-            id: 3,
-            href: paths.auth.forgotPassword,
-            label: 'Forgot Password',
-        },
     ]
     return (
         <div className='flex w-full justify-center items-center '>
