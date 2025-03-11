@@ -2,6 +2,7 @@
 import MarketingHero from '@/app/(marketing)/_components/marketing-hero'
 import MarketingFeatureGrid from '@/app/(marketing)/_components/marketing-feature-grid'
 import MarketingStats from '@/app/(marketing)/_components/marketing-stats'
+import MarketingCta from '@/app/(marketing)/_components/marketing-cta'
 
 const Marketing = () => {
 
@@ -12,6 +13,7 @@ const Marketing = () => {
                 <MarketingFeatureGrid />
             </div>
             <MarketingStats />
+            <MarketingCta />
         </div>
     )
 }
