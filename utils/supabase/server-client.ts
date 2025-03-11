@@ -22,8 +22,10 @@ export async function serverClient() {
                 },
                 setAll(cookiesToSet) {
                     try {
-                        cookiesToSet.forEach(({ name, value, options }) =>
-                            cookieStore.set(name, value, options));
+                        cookiesToSet.forEach(({ name, value, options }) => {
+                            options.sameSite = 'strict';
+                            cookieStore.set(name, value, options)
+                        })
                     } catch (error) {
                         console.error(error);
                     }
