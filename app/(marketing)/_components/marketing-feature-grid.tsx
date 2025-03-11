@@ -4,7 +4,7 @@ import MarketingFeatureCard from '@/app/(marketing)/_components/marketing-featur
 
 export default function MarketingFeatureGrid() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
             <MarketingFeatureCard
                 icon={Zap}
                 title="Title Here"
