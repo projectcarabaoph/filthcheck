@@ -22,10 +22,9 @@ export async function serverClient() {
                 },
                 setAll(cookiesToSet) {
                     try {
-                        cookiesToSet.forEach(({ name, value, options }) => {
-                            options.sameSite = 'strict';
+                        cookiesToSet.forEach(({ name, value, options }) =>
                             cookieStore.set(name, value, options)
-                        })
+                        );
                     } catch (error) {
                         console.error(error);
                     }
@@ -58,10 +57,9 @@ export async function middlewareClient(request: NextRequest) {
                     response = NextResponse.next({
                         request,
                     })
-                    cookiesToSet.forEach(({ name, value, options }) => {
-                        options.sameSite = 'strict';
+                    cookiesToSet.forEach(({ name, value, options }) =>
                         response.cookies.set(name, value, options)
-                    })
+                    )
                 }
             }
         }
