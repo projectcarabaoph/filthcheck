@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server'
-import type { EmailOtpType } from '@supabase/supabase-js'
 import type { NextRequest } from 'next/server'
+import type { EmailOtpType } from '@supabase/supabase-js'
 import { serverClient } from '@/utils/supabase/server-client'
+import paths from '@/utils/paths/paths.config'
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
@@ -22,6 +23,6 @@ export async function GET(request: NextRequest) {
         }
     }
 
-    // redirect the user to an error page with some instructions
-    return NextResponse.redirect('/')
+    // redirect user to specified redirect URL (can be error page) or root of app 
+    return NextResponse.redirect(paths.app.home)
 }
