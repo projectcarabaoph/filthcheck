@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import paths from '@/utils/paths/paths.config';
+import { AvatarHolderSvg } from '@/public/assets/svgs';
 
 const MarketingNavigation = () => {
 
@@ -16,7 +17,10 @@ const MarketingNavigation = () => {
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
                         <div className="flex-shrink-0 flex items-center">
-                            <Link href={paths.app.home} className="ml-2 text-xl font-bold text-gray-900">FilthCheck</Link >
+                            <Link href={paths.app.home} className="flex flex-row gap-2 items-center justify-center ml-2 text-xl font-bold text-gray-900">
+                                <AvatarHolderSvg className="h-8 w-8" />
+                                <span>FilthCheck</span>
+                            </Link >
                         </div>
                     </div>
 
