@@ -1,6 +1,9 @@
 import { z } from "zod";
 
 const PathsSchema = z.object({
+  marketing: z.object({
+    landing: z.string().min(1),
+  }),
   auth: z.object({
     signIn: z.string().min(1),
     signUp: z.string().min(1),
@@ -15,6 +18,9 @@ const PathsSchema = z.object({
 });
 
 const paths = PathsSchema.parse({
+  marketing: {
+    landing: "/",
+  },
   auth: {
     signIn: "/auth/sign-in",
     signUp: "/auth/sign-up",
