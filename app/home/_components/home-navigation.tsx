@@ -1,12 +1,15 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LogOut, Menu, User, X } from "lucide-react";
 
 import { AvatarHolderSvg } from "@/public/assets/svgs";
 import paths from "@/utils/paths/paths.config";
 import { useUser } from "@/context/user-context";
+
+import { homeNavLinks } from "@/utils/constants/navlinks";
+import useScreenSize from "@/hooks/useScreenSize";
 
 import {
     Avatar,
@@ -23,7 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/app/auth/actions";
-import { homeNavLinks } from "@/utils/constants/navlinks";
+
 
 export default function HomeNavigation() {
 
@@ -31,6 +34,14 @@ export default function HomeNavigation() {
     const [isAvatarOpen, setIsAvatarOpen] = useState<boolean>(false)
 
     const user = useUser()
+    const { width } = useScreenSize()
+
+    useEffect(() => {
+        const md: number = 768
+        if (width >= md) {
+            setIsOpen(false)
+        }
+    }, [width])
 
     return (
         <nav className="bg-white shadow-sm fixed top-0 w-full z-50">
