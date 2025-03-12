@@ -1,15 +1,25 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import paths from '@/utils/paths/paths.config';
 import { AvatarHolderSvg } from '@/public/assets/svgs';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const MarketingNavigation = () => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const { width } = useScreenSize()
+
+    useEffect(() => {
+        const md: number = 768
+        if (width >= md) {
+            setIsOpen(false)
+        }
+    }, [width])
 
     return (
         <nav className="bg-white shadow-sm fixed top-0 w-full z-50">
