@@ -72,12 +72,12 @@ export async function middlewareClient(request: NextRequest) {
 
     if (user && !pathname.startsWith(paths.app.home)) {
         requestUrl.pathname = paths.app.home
-        return NextResponse.redirect(url)
+        return NextResponse.redirect(requestUrl)
     }
 
     if (!user && pathname.startsWith(paths.app.home)) {
         requestUrl.pathname = paths.auth.signIn
-        return NextResponse.redirect(url)
+        return NextResponse.redirect(requestUrl)
     }
 
 
