@@ -81,7 +81,7 @@ export default function HomeNavigation() {
                                     <DropdownMenuSeparator className="bg-dark_accent_2" />
                                     <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent">
                                         <User className="mr-2 h-4 w-4" />
-                                        <Link href={paths.app.profile}>Profile</Link>
+                                        <Link href={paths.app.account}>Account</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator className="bg-dark_accent_2" />
                                     <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent" onClick={() => signOut()}>

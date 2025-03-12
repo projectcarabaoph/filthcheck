@@ -11,7 +11,7 @@ const PathsSchema = z.object({
   }),
   app: z.object({
     home: z.string().min(1),
-    profile: z.string().min(1),
+    account: z.string().min(1),
   }),
 });
 
@@ -26,7 +26,7 @@ const paths = PathsSchema.parse({
   },
   app: {
     home: "/home",
-    profile: "/home/profile"
+    account: "/home/account"
   },
 } satisfies z.infer<typeof PathsSchema>);
 
