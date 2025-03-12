@@ -23,30 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/app/auth/actions";
-
-type THomeNavlinks = {
-    id: number,
-    title: string,
-    path: string
-}
-
-const homeNavLinks: THomeNavlinks[] = [
-    {
-        id: 1,
-        title: 'Home',
-        path: paths.app.home
-    },
-    {
-        id: 2,
-        title: 'Analytics',
-        path: paths.app.home
-    },
-    {
-        id: 3,
-        title: 'Profile',
-        path: paths.app.home
-    },
-]
+import { homeNavLinks } from "@/utils/constants/navlinks";
 
 export default function HomeNavigation() {
 

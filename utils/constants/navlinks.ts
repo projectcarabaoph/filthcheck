@@ -1,0 +1,20 @@
+import type { THomeNavlinks } from "@/utils/constants/_types";
+import paths from "@/utils/paths/paths.config";
+
+export const homeNavLinks: THomeNavlinks[] = [
+    {
+        id: 1,
+        title: 'Home',
+        path: paths.app.home
+    },
+    {
+        id: 2,
+        title: 'Analytics',
+        path: paths.app.home
+    },
+    {
+        id: 3,
+        title: 'Profile',
+        path: paths.app.home
+    },
+]
