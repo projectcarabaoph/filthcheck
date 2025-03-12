@@ -16,7 +16,7 @@ export default async function HomeLayout({ children }: { children: ReactNode }) 
 
     return (
         <UserProvider userData={user as IUserData}>
-            <main className="min-h-dvh h-auto flex flex-col justify-center">
+            <main className="min-h-dvh h-auto grid grid-rows-[64px_1fr] grid-cols-1">
                 <HomeNavigation />
                 {children}
             </main>
