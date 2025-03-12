@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 import { UserProvider } from "@/context/user-context";
 import type { IUserData } from "@/context/_types";
 import { serverClient } from "@/utils/supabase/server-client";
+import HomeNavigation from "@/app/home/_components/home-navigation";
 
 
 export default async function HomeLayout({ children }: { children: ReactNode }) {
@@ -15,11 +16,10 @@ export default async function HomeLayout({ children }: { children: ReactNode }) 
 
     return (
         <UserProvider userData={user as IUserData}>
-            <div >
-                <main>
-                    {children}
-                </main>
-            </div>
+            <main className="min-h-dvh h-auto flex flex-col justify-center">
+                <HomeNavigation />
+                {children}
+            </main>
         </UserProvider>
     )
 }
