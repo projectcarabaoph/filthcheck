@@ -15,6 +15,6 @@ export const homeNavLinks: THomeNavlinks[] = [
     {
         id: 3,
         title: 'Profile',
-        path: paths.app.home
+        path: paths.app.profile
     },
 ]
