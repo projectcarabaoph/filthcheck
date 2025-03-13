@@ -16,14 +16,15 @@ interface IApiKeyCard {
 }
 
 export default function ApiKeyCard({
-    apiKey = "FILTHCHECK_TOKEN='eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5cf'"
+    apiKey = 'eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5cf'
 }: IApiKeyCard) {
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(apiKey);
     };
 
-    const maskedKey = apiKey.substring(0, 26) + "•".repeat(apiKey.length - 14) + apiKey.substring(apiKey.length - 4);
+    const envVariable = `FILTHCHECK_TOKEN='${apiKey}`
+    const maskedKey = envVariable.substring(0, 26) + "•".repeat(envVariable.length - 14) + apiKey.substring(apiKey.length - 4);
 
     return (
         <Card className="w-full glass-card shadow-card overflow-hidden relative transition-all duration-300 hover:shadow-elevated">
