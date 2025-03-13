@@ -1,4 +1,5 @@
 import ApiKeyCard from "@/app/home/(dashboard)/_components/api-key-card"
+import TestApiCard from "./_components/test-api-card"
 
 const Dashboard = () => {
     return (
@@ -11,6 +12,7 @@ const Dashboard = () => {
                     <span className="text-sm">Manage you api information</span>
                 </div>
                 <ApiKeyCard />
+                <TestApiCard />
             </div>
         </div>
     )
