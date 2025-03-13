@@ -110,7 +110,7 @@ export default function HomeNavigation() {
 
             {/* Mobile menu */}
             {isOpen && (
-                <div className="sm:hidden">
+                <div className="sm:hidden bg-white">
                     <div className="pt-2 pb-3 space-y-1">
                         {homeNavLinks.map((link) => (
                             <Link
