@@ -1,5 +1,28 @@
 import Link from "next/link"
 import { Plus } from 'lucide-react'
+
+import type { TAppCard } from "@/app/home/(dashboard)/_types"
+import ListComponent from "@/components/shared/list-component"
+import AppCard from "@/app/home/(dashboard)/_components/app-card"
+
+const appData: TAppCard[] = [
+    {
+        title: 'sample title 1',
+        description: 'sample description to test app card 1',
+        path: "#"
+    },
+    {
+        title: 'sample title 2',
+        description: 'sample description to test app card 2',
+        path: "#"
+    },
+    {
+        title: 'sample title 3',
+        description: 'sample description to test app card 3',
+        path: "#"
+    },
+]
+
 const Dashboard = () => {
     return (
         <div className="w-full flex flex-col items-center">
@@ -13,6 +36,18 @@ const Dashboard = () => {
                     </Link>
                 </div>
 
+                <ListComponent
+                    data={appData}
+                    className="flex flex-col gap-2"
+                    renderItem={(data: TAppCard) => (
+                        <Link
+                            href={data.path as string}
+                            className={`py-2 px-2 font-medium w-full`}
+                        >
+                            <AppCard title={data.title} description={data.description} />
+                        </Link>
+                    )}
+                />
             </div>
         </div>
     )

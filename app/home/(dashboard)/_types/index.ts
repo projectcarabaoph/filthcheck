@@ -1,4 +1,5 @@
 export type TAppCard = {
     title: string,
-    description: string
+    description: string,
+    path?: string
 }
