@@ -10,6 +10,7 @@ FilthCheck is a simple API for detecting Not Safe For Work (NSFW) image content.
 - Built with Next.js, Node.js, Express.js, and TypeScript
 
 ## Tech Stack
+- **Next.js** - Serverless Web app to manage API
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web framework for building REST APIs
 - **TypeScript** - Type-safe JavaScript
