@@ -59,6 +59,7 @@ export default function CreateNewProjecForm() {
         <label htmlFor='title' className='text-gray-700 font-medium'>App Title</label>
         <div className="relative">
           <Input
+            autoComplete='off'
             type='text'
             className="font-mono text-sm bg-secondary/50"
             {...register('title')}
@@ -71,6 +72,7 @@ export default function CreateNewProjecForm() {
         <label htmlFor='title' className='text-gray-700 font-medium'>Description</label>
         <div className="relative">
           <Input
+            autoComplete='off'
             type='text'
             className="font-mono text-sm bg-secondary/50"
             {...register('description')}
@@ -105,8 +107,9 @@ export default function CreateNewProjecForm() {
         <label htmlFor='title' className='text-gray-700 font-medium'>Region</label>
         <div className="relative">
           <Input
+            disabled
             type='text'
-            className="font-mono text-slate-500 text-sm bg-secondary/50"
+            className="font-mono text-sm bg-secondary/50"
             value="SouthEast Asia (Singapore)"
             readOnly
           />
