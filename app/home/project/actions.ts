@@ -1,4 +1,4 @@
-'user server'
+'use server'
 
 import { revalidatePath } from "next/cache"
 import { serverClient } from "@/utils/supabase/server-client"

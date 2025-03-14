@@ -4,10 +4,13 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RefreshCw, Globe } from 'lucide-react'
-
+import { toast } from 'sonner'
+import { useRouter } from "next/navigation";
 
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { createNewProject } from '../actions'
+import paths from '@/utils/paths/paths.config'
 
 const newProjectSchema = z.object({
   title: z.
@@ -25,6 +28,8 @@ export type TNewProjectSchema = z.infer<typeof newProjectSchema>
 
 export default function CreateNewProjecForm() {
 
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -36,8 +41,15 @@ export default function CreateNewProjecForm() {
   })
 
 
-  const onSubmit = (data: TNewProjectSchema) => {
-    console.log(data)
+  const onSubmit = async (data: TNewProjectSchema) => {
+    try {
+      await createNewProject(data)
+      toast.success('New project created successfully.')
+      reset()
+      router.push(paths.app.home)
+    } catch (error) {
+      if (error instanceof Error) toast.error(error.message)
+    }
 
   }
 
@@ -64,7 +76,7 @@ export default function CreateNewProjecForm() {
             {...register('description')}
           />
         </div>
-        <small className='text-red-500'>{errors.title?.message}</small>
+        <small className='text-red-500'>{errors.description?.message}</small>
       </div>
 
       <div className='flex flex-col gap-1'>
