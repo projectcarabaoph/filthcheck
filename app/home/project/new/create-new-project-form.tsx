@@ -20,7 +20,7 @@ const newProjectSchema = z.object({
     .max(200, { message: 'Description cannot exceed 200 characters.' }),
 })
 
-type TNewProjectSchema = z.infer<typeof newProjectSchema>
+export type TNewProjectSchema = z.infer<typeof newProjectSchema>
 
 
 export default function CreateNewProjecForm() {
