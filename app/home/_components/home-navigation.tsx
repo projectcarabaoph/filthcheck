@@ -45,11 +45,11 @@ export default function HomeNavigation() {
 
     return (
         <nav className="bg-white shadow-sm sticky top-0  z-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 ">
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
                         <div className="flex-shrink-0 flex items-center">
-                            <Link href={paths.marketing.landing} className="flex flex-row gap-2 items-center justify-center ml-2 text-xl font-bold text-gray-900">
+                            <Link href={paths.marketing.landing} className="flex flex-row gap-2 items-center justify-center text-xl font-bold text-gray-900">
                                 <AvatarHolderSvg className="h-8 w-8" />
                                 <span>FilthCheck</span>
                             </Link >
