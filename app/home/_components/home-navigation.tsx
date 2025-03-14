@@ -71,19 +71,19 @@ export default function HomeNavigation() {
                                         </Avatar>
                                     </Button>
                                 </DropdownMenuTrigger >
-                                <DropdownMenuContent className="bg-dark_accent_1 w-56 border-dark_accent_2" align="end" forceMount>
+                                <DropdownMenuContent className="bg-white w-56 border-slate-200" align="end" forceMount>
                                     <DropdownMenuLabel className="font-normal">
                                         <div className="flex flex-col space-y-1">
                                             <p className="text-sm text-black font-medium leading-none">{user.user_metadata.full_name}</p>
                                             <p className="text-xs text-gray-400 leading-none text-muted-foreground">{user.email}</p>
                                         </div>
                                     </DropdownMenuLabel>
-                                    <DropdownMenuSeparator className="bg-dark_accent_2" />
+                                    <DropdownMenuSeparator className="bg-slate-200" />
                                     <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent">
                                         <User className="mr-2 h-4 w-4" />
                                         <Link href={paths.app.account}>Account</Link>
                                     </DropdownMenuItem>
-                                    <DropdownMenuSeparator className="bg-dark_accent_2" />
+                                    <DropdownMenuSeparator className="bg-slate-200" />
                                     <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent" onClick={() => signOut()}>
                                         <LogOut className="mr-2 h-4 w-4" />
                                         <span>Sign out</span>
