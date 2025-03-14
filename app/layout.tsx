@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en"
       suppressHydrationWarning>
       <body className={`${poppinsSans.className}`}>
-        <Toaster richColors position="top-center" />
+        <Toaster richColors position="top-right" />
         {children}
       </body>
     </html>
