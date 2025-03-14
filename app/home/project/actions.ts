@@ -9,13 +9,12 @@ export const createNewProject = async (formData: TNewProjectSchema) => {
 
     const supabase = await serverClient()
 
-    const newFormData = new FormData()
-    newFormData.append('title', formData.title.trim())
-    newFormData.append('description', formData.description.trim())
-
     const { data, error } = await supabase
         .from('projects')
-        .insert(newFormData)
+        .insert({
+            title: formData.title.trim(),
+            description: formData.description.trim()
+        })
 
     if (error) throw new Error(error.message)
 
