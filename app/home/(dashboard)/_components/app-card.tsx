@@ -17,7 +17,7 @@ export default function AppCard({ data }: { data: TAppCard }) {
     const { title, description, plan, pattern } = data
 
     return (
-        <Card className="w-full sm:max-w-md shadow-card overflow-hidden relative transition-all duration-300 hover:bg-slate-50">
+        <Card className="w-full shadow-card overflow-hidden relative transition-all duration-300 hover:bg-slate-50">
             <div style={{ backgroundImage: pattern }} className="w-full h-full min-h-24 max-h-24">
             </div>
             <CardHeader className="pb-2 ">
