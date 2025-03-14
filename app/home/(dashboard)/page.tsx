@@ -44,6 +44,7 @@ const Dashboard = () => {
                     className="flex flex-col gap-2"
                     renderItem={(data: TAppCard) => (
                         <Link
+                            key={data.title}
                             href={data.path as string}
                             className={`py-2 px-2 font-medium w-full`}
                         >
