@@ -7,26 +7,19 @@ import paths from "@/utils/paths/paths.config"
 import ListComponent from "@/components/shared/list-component"
 import AppCard from "@/app/home/(dashboard)/_components/app-card"
 
+import { serverClient } from "@/utils/supabase/server-client"
+import { toast } from "sonner"
 
-const appData: TAppCard[] = [
-    {
-        title: 'sample title 1',
-        description: 'sample description to test app card 1',
-        path: "#"
-    },
-    {
-        title: 'sample title 2',
-        description: 'sample description to test app card 2',
-        path: "#"
-    },
-    {
-        title: 'sample title 3',
-        description: 'sample description to test app card 3',
-        path: "#"
-    },
-]
+const Dashboard = async () => {
 
-const Dashboard = () => {
+    const supabase = await serverClient()
+
+    const { data: projectData, error } = await supabase
+        .from('projects')
+        .select(`*`);
+
+    if (error) toast.error(error.message)
+
     return (
         <div className="w-full flex flex-col items-center">
             <div className="flex flex-col gap-2 p-4 w-full max-w-7xl">
@@ -40,12 +33,12 @@ const Dashboard = () => {
                 </div>
 
                 <ListComponent
-                    data={appData}
+                    data={[]}
                     className="flex flex-col gap-2"
                     renderItem={(data: TAppCard) => (
                         <Link
                             key={data.title}
-                            href={data.path as string}
+                            href={'#'}
                             className={`py-2 px-2 font-medium w-full`}
                         >
                             <AppCard title={data.title} description={data.description} />
