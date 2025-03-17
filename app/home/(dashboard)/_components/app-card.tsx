@@ -1,5 +1,6 @@
 'use client'
-import Link from "next/link";
+
+import { useRouter } from 'next/navigation'
 import { Settings } from "lucide-react";
 
 import type { TAppCard } from "@/app/home/(dashboard)/_types";
@@ -11,10 +12,17 @@ import {
     CardHeader,
     CardTitle
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function AppCard({ data }: { data: TAppCard }) {
 
     const { title, description, plan, pattern } = data
+
+    const router = useRouter()
+
+    const handleOnClick = (url: string) => {
+        router.push(url)
+    }
 
     return (
         <Card className="w-full h-full shadow-card overflow-hidden relative transition-all duration-300 hover:bg-slate-50">
@@ -23,9 +31,9 @@ export default function AppCard({ data }: { data: TAppCard }) {
             <CardHeader className="pb-2 ">
                 <div className="flex flex-row justify-between items-center gap-2">
                     <CardTitle className="text-lg font-medium">{title}</CardTitle>
-                    <Link href={'#'}>
+                    <Button variant='ghost' className='p-0 m-0' onClick={() => (handleOnClick('#'))}>
                         <Settings className="w-4 h-4 text-slate-500 hover:text-slate-700" />
-                    </Link>
+                    </Button>
                 </div>
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
