@@ -4,3 +4,11 @@ export type TListComponent<T> = {
     data: T[];
     renderItem: (item: T, index: number) => React.ReactNode;
 };
+
+export type TEmptyComponent = {
+    className?: string
+    message?: string
+    subMessage?: string
+    action?: React.ReactNode
+    icon?: React.ReactNode
+}
