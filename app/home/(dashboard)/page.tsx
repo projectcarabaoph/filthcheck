@@ -9,6 +9,7 @@ import ListComponent from "@/components/shared/list-component"
 import AppCard from "@/app/home/(dashboard)/_components/app-card"
 
 import { serverClient } from "@/utils/supabase/server-client"
+import EmptyComponent from "@/components/shared/empty-component"
 
 const Dashboard = async () => {
 
@@ -32,17 +33,21 @@ const Dashboard = async () => {
                         <span>Create New App</span>
                     </Link>
                 </div>
-
-                <ListComponent
-                    data={projectData as TAppCard[]}
-                    className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-2 "
-                    renderItem={(data: TAppCard) => (
-                        <Link key={data.title} href={'#'} >
-                            <AppCard data={data} />
-                        </Link>
-                    )}
-                />
-
+                {projectData?.length ?
+                    (
+                        <ListComponent
+                            data={projectData as TAppCard[]}
+                            className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-2 "
+                            renderItem={(data: TAppCard) => (
+                                <Link key={data.title} href={'#'} >
+                                    <AppCard data={data} />
+                                </Link>
+                            )}
+                        />
+                    ) : (
+                        <EmptyComponent />
+                    )
+                }
             </div>
         </div>
     )
