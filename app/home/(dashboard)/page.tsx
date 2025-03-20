@@ -41,7 +41,7 @@ const Dashboard = async () => {
                     (
                         <ListComponent
                             data={projectData as TAppCard[]}
-                            className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-2 "
+                            className="grid sm:grid-cols-[repeat(auto-fit,minmax(280px,max-content))] gap-2 "
                             renderItem={(data: TAppCard) => (
                                 <Link key={data.title} href={'#'} >
                                     <AppCard data={data} />
