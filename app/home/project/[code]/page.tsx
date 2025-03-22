@@ -3,14 +3,14 @@ import type { IProject } from "@/app/home/project/_types";
 
 
 const Project = ({ params }: IProject) => {
-    const { unique_code } = params;
+    const { code } = params;
 
-    if (!unique_code) return notFound(); // Show 404 if no unique_code
+    if (!code) return notFound(); // Show 404 if no code
 
     return (
         <div>
-            <h1>Project unique_code: {unique_code}</h1>
-            <p>Displaying project details for {unique_code}</p>
+            <h1>Project code: {code}</h1>
+            <p>Displaying project details for {code}</p>
         </div>
     );
 }
