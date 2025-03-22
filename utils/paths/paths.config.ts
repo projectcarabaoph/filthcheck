@@ -29,7 +29,7 @@ const paths = PathsSchema.parse({
   app: {
     home: "/home",
     account: "/home/account",
-    project: "/home/project/:unique_code",
+    project: "/home/project/:code",
     newProject: "/home/project/new"
   },
 } satisfies z.infer<typeof PathsSchema>);
