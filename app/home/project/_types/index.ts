@@ -1,3 +1,3 @@
 export interface IProject {
-    params: { id: string }; // Get ID from URL
+    params: { unique_code: string }; // Get unique_code from URL
 }
