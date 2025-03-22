@@ -30,9 +30,9 @@ const Dashboard = async () => {
                     <h1 className="text-lg font-bold text-gray-900 ">
                         Apps
                     </h1>
-                    <Link as={isProjectData ? 'div' : ''}
+                    <Link
                         href={paths.app.newProject}
-                        className={`${isProjectData ? 'bg-gray-300 ' : 'bg-custome-pink hover:bg-custome-pink/90 '} justify-center text-white px-4 py-2 rounded-md flex items-center gap-2 transition-colors`}>
+                        className={`${isProjectData ? 'bg-gray-300 pointer-events-none' : 'bg-custome-pink hover:bg-custome-pink/90 '} justify-center text-white px-4 py-2 rounded-md flex items-center gap-2 transition-colors`}>
                         <Plus className="h-5 w-5" />
                         <span>Create New App</span>
                     </Link>
