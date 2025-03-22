@@ -7,5 +7,6 @@ export type TAppCard = {
     region: string,
     created_at: string,
     updated_at: string,
-    pattern: string
+    pattern: string,
+    code: string
 }
