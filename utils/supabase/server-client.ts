@@ -69,14 +69,13 @@ export async function middlewareClient(request: NextRequest) {
 
     const { pathname } = request.nextUrl
     const requestUrl = request.nextUrl.clone()
-    const privatePaths = Object.values(paths.app).includes(pathname)
 
-    if (user && !privatePaths) {
+    if (user && !pathname.startsWith(paths.app.home)) {
         requestUrl.pathname = paths.app.home
         return NextResponse.redirect(requestUrl)
     }
 
-    if (!user && privatePaths) {
+    if (!user && pathname.startsWith(paths.app.home)) {
         requestUrl.pathname = paths.auth.signIn
         return NextResponse.redirect(requestUrl)
     }
