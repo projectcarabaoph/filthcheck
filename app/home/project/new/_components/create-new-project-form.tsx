@@ -9,7 +9,8 @@ import { useRouter } from "next/navigation";
 
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { createNewProject } from '../actions'
+
+import { createNewProject } from '@/app/home/project/actions'
 import paths from '@/utils/paths/paths.config'
 
 const newProjectSchema = z.object({

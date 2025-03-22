@@ -1,4 +1,4 @@
-import CreateNewProjecForm from "@/app/home/project/new/create-new-project-form"
+import CreateNewProjecForm from "@/app/home/project/new/_components/create-new-project-form"
 
 const NewProject = () => {
     return (

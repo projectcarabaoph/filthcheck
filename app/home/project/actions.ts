@@ -7,7 +7,7 @@ import paths from "@/utils/paths/paths.config"
 import { generateRandomPattern } from "@/utils/misc/generate-random-pattern"
 import { generateApiToken } from "@/utils/misc/generate-api-token"
 
-import type { TNewProjectSchema } from "@/app/home/project/new/create-new-project-form"
+import type { TNewProjectSchema } from "@/app/home/project/new/_components/create-new-project-form"
 
 export const createNewProject = async (formData: TNewProjectSchema) => {
 
