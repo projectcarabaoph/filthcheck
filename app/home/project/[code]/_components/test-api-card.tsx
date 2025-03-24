@@ -24,7 +24,7 @@ export default function TestApiCard({
 
     const [imageURL, setImageURL] = useState<string>('')
     const [output, setOutput] = useState<IApiResponse>({} as IApiResponse)
-
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const {
         register,
         handleSubmit,
@@ -45,6 +45,7 @@ export default function TestApiCard({
     }
 
     const postDetectImage = async (imageURL: string) => {
+        setIsLoading(true)
         try {
             const response = await fetch('http://localhost:4000/api/detect/image', {
                 method: 'POST',
@@ -63,6 +64,8 @@ export default function TestApiCard({
             setOutput(data)
         } catch (error) {
             if (error instanceof Error) toast.error(error.message)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -86,7 +89,7 @@ export default function TestApiCard({
 
                         <button
                             disabled={!isDirty || !isValid || isSubmitting}
-                            className="bg-white pl-1 absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                            className="bg-white px-1 absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                             type="submit"
                         >
                             POST
@@ -94,12 +97,10 @@ export default function TestApiCard({
                     </div>
                     {errors.imageURL && <small className="text-red-500">{errors.imageURL.message}</small>}
                 </form>
-                <div>
+                <div className="flex flex-col gap-2 mt-2">
                     <p>Output:</p>
                     <pre className="bg-indigo-50 rounded-md p-2">
-                        <code >
-                            <code>{JSON.stringify(output, null, 2)}</code>
-                        </code>
+                        {isLoading ? <span>Loading...</span> : <code>{JSON.stringify(output, null, 2)}</code>}
                     </pre>
                 </div>
             </CardContent>
