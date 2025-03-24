@@ -27,3 +27,6 @@ export interface IApiResponse {
 
 export type TTestApiCardSchema = z.infer<typeof testApiCardSchema>
 
+export type TTestApiCard = {
+    apiKey?: string
+}

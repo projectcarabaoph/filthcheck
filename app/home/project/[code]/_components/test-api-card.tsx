@@ -14,11 +14,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
-import type { IApiResponse, TTestApiCardSchema } from "@/app/home/project/_types";
+import type { IApiResponse, TTestApiCard, TTestApiCardSchema } from "@/app/home/project/_types";
 import { testApiCardSchema } from "@/app/home/project/_lib/schemas";
 
 
-export default function TestApiCard() {
+export default function TestApiCard({
+    apiKey = ""
+}: TTestApiCard) {
 
     const [imageURL, setImageURL] = useState<string>('')
     const [output, setOutput] = useState<IApiResponse>({} as IApiResponse)
