@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from "react";
-import * as z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form'
+import { toast } from "sonner";
 
 import {
     Card,
@@ -13,21 +13,15 @@ import {
     CardTitle
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
 
-
-const testApiCardSchema = z.object({
-    imageURL: z
-        .string({ required_error: "Missing required field: imageURL." })
-        .url({ message: "Invalid image URL." })
-})
-
-export type TTestApiCardSchema = z.infer<typeof testApiCardSchema>
+import type { IApiResponse, TTestApiCardSchema } from "@/app/home/project/_types";
+import { testApiCardSchema } from "@/app/home/project/_lib/schemas";
 
 
 export default function TestApiCard() {
 
     const [imageURL, setImageURL] = useState<string>('')
+    const [output, setOutput] = useState<IApiResponse>({} as IApiResponse)
 
     const {
         register,
@@ -63,7 +57,7 @@ export default function TestApiCard() {
             if (!response.ok) {
                 throw new Error(data.message)
             }
-            console.log(data)
+            setOutput(data)
         } catch (error) {
             if (error instanceof Error) toast.error(error.message)
         }
@@ -97,7 +91,14 @@ export default function TestApiCard() {
                     </div>
                     {errors.imageURL && <small className="text-red-500">{errors.imageURL.message}</small>}
                 </form>
-
+                <div>
+                    <p>Output:</p>
+                    <pre className="bg-indigo-50 rounded-md p-2">
+                        <code >
+                            <code>{JSON.stringify(output, null, 2)}</code>
+                        </code>
+                    </pre>
+                </div>
             </CardContent>
         </Card>
     )

@@ -1,3 +1,6 @@
+import type { z } from 'zod'
+import type { testApiCardSchema } from '@/app/home/project/_lib/schemas';
+
 export interface IProject {
     params: { code: string }; // Get code from URL
 }
@@ -11,3 +14,16 @@ export type TApiKeys = {
     created_at: string,
     updated_at: string
 }
+
+export interface IClassification {
+    label: string;
+    score: number;
+}
+
+export interface IApiResponse {
+    status: number;
+    data: IClassification[];
+}
+
+export type TTestApiCardSchema = z.infer<typeof testApiCardSchema>
+
