@@ -13,6 +13,7 @@ import {
     CardTitle
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 
 const testApiCardSchema = z.object({
@@ -44,7 +45,28 @@ export default function TestApiCard() {
     }
 
     const onSubmit = (formData: TTestApiCardSchema) => {
-        console.log(formData)
+        postDetectImage(formData.imageURL)
+    }
+
+    const postDetectImage = async (imageURL: string) => {
+        try {
+            const response = await fetch('http://localhost:4000/api/detect/image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify({ imageURL })
+            })
+            const data = await response.json()
+
+            if (!response.ok) {
+                throw new Error(data.message)
+            }
+            console.log(data)
+        } catch (error) {
+            if (error instanceof Error) toast.error(error.message)
+        }
     }
 
     return (
