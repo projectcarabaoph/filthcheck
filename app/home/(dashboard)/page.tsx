@@ -43,7 +43,7 @@ const Dashboard = async () => {
                             data={projectData as TAppCard[]}
                             className="grid sm:grid-cols-[repeat(auto-fit,minmax(280px,max-content))] gap-2 "
                             renderItem={(data: TAppCard) => (
-                                <AppCard data={data} />
+                                <AppCard key={data.title} data={data} />
                             )}
                         />
                     ) : (
