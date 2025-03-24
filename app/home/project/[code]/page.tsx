@@ -9,7 +9,7 @@ import TestApiCard from "@/app/home/project/[code]/_components/test-api-card";
 
 
 const Project = async ({ params }: IProject) => {
-    const { code } = params;
+    const { code } = await params;
 
     if (!code) return notFound();
 
