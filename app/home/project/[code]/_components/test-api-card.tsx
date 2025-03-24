@@ -51,6 +51,7 @@ export default function TestApiCard({
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
+                    'X-FilthCheckAPI-Key': apiKey
                 },
                 body: JSON.stringify({ imageURL })
             })
