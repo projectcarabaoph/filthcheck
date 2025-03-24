@@ -27,7 +27,7 @@ const Project = async ({ params }: IProject) => {
                     <h1 className="text-lg  font-bold text-gray-900 ">
                         API Keys
                     </h1>
-                    <span className="text-sm">Your API is secured behind an API gateway which requires an API Key for every request.</span>
+                    <span className="text-sm">Manage your api key information</span>
                 </div>
                 <div className="flex flex-col gap-2 p-2">
                     <ApiKeyCard apiKey={data?.api_key} />
