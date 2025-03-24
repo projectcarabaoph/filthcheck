@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import type { IProject } from "@/app/home/project/_types";
+import type { IProject, TApiKeys } from "@/app/home/project/_types";
 import { serverClient } from "@/utils/supabase/server-client";
 import { toast } from "sonner";
 
@@ -15,7 +15,7 @@ const Project = async ({ params }: IProject) => {
         .from('api_keys')
         .select('*')
         .eq('project_code', code)
-        .single()
+        .single<TApiKeys>()
 
     if (error) toast.error(error.message)
 
