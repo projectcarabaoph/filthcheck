@@ -1,11 +1,26 @@
 import { notFound } from "next/navigation";
 import type { IProject } from "@/app/home/project/_types";
+import { serverClient } from "@/utils/supabase/server-client";
+import { toast } from "sonner";
 
 
-const Project = ({ params }: IProject) => {
+const Project = async ({ params }: IProject) => {
     const { code } = params;
 
     if (!code) return notFound();
+
+    const supabase = await serverClient()
+
+    const { data, error } = await supabase
+        .from('api_keys')
+        .select('*')
+        .eq('project_code', code)
+        .single()
+
+    if (error) toast.error(error.message)
+
+    console.log(data)
+
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">
