@@ -14,10 +14,12 @@ import {
     CardTitle
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { replacePlaceholders } from '@/utils/misc/replace-placeholder';
+import paths from '@/utils/paths/paths.config';
 
 export default function AppCard({ data }: { data: TAppCard }) {
 
-    const { title, description, plan, pattern } = data
+    const { title, description, plan, pattern, code } = data
 
     const router = useRouter()
 
@@ -25,8 +27,10 @@ export default function AppCard({ data }: { data: TAppCard }) {
         router.push(url)
     }
 
+    const newUrl = replacePlaceholders(paths.app.project, { code })
+
     return (
-        <Link key={data.title} href={'#'} >
+        <Link key={data.title} href={newUrl} >
             <Card className="w-full h-full shadow-card overflow-hidden relative transition-all duration-300 hover:bg-slate-50">
                 <div style={{ backgroundImage: pattern }} className="w-full h-full min-h-24 max-h-24">
                 </div>
