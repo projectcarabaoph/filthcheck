@@ -1,8 +1,11 @@
 import { notFound } from "next/navigation";
+import { toast } from "sonner";
+
 import type { IProject, TApiKeys } from "@/app/home/project/_types";
 import { serverClient } from "@/utils/supabase/server-client";
-import { toast } from "sonner";
-import ApiKeyCard from "./_components/api-key-card";
+
+import ApiKeyCard from "@/app/home/project/[code]/_components/api-key-card";
+import TestApiCard from "@/app/home/project/[code]/_components/test-api-card";
 
 
 const Project = async ({ params }: IProject) => {
@@ -31,6 +34,7 @@ const Project = async ({ params }: IProject) => {
                 </div>
                 <div className="flex flex-col gap-2 p-2">
                     <ApiKeyCard apiKey={data?.api_key} />
+                    <TestApiCard />
                 </div>
             </div>
         </div>
