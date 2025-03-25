@@ -46,6 +46,7 @@ export default function TestApiCard({
 
     const postDetectImage = async (imageURL: string) => {
         setIsLoading(true)
+        setOutput({} as IApiResponse)
         try {
             const response = await fetch('http://localhost:4000/api/detect/image', {
                 method: 'POST',
