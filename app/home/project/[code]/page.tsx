@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
 
-import type { IProject, TApiKeys } from "@/app/home/project/_types";
 import { serverClient } from "@/utils/supabase/server-client";
+
+import type { IProject, TApiKeys } from "@/app/home/project/_types";
 
 import ApiKeyCard from "@/app/home/project/[code]/_components/api-key-card";
 import TestApiCard from "@/app/home/project/[code]/_components/test-api-card";
+import AllowedDomainsCard from "@/app/home/project/[code]/_components/allowed-domains-card";
 
 const Project = async ({ params }: IProject) => {
     const { code } = await params;
@@ -31,6 +33,7 @@ const Project = async ({ params }: IProject) => {
                 <div className="flex flex-col gap-2 p-2">
                     <ApiKeyCard apiKey={data?.api_key} />
                     <TestApiCard apiKey={data?.api_key} />
+                    <AllowedDomainsCard domains={data?.domains} />
                 </div>
             </div>
         </div>
