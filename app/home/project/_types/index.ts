@@ -1,5 +1,5 @@
 import type { z } from 'zod'
-import type { testApiCardSchema } from '@/app/home/project/_lib/schemas';
+import type { allowedDomainsSchema, testApiCardSchema } from '@/app/home/project/_lib/schemas';
 
 export interface IProject {
     params: { code: string }; // Get code from URL
@@ -31,3 +31,5 @@ export type TTestApiCardSchema = z.infer<typeof testApiCardSchema>
 export type TTestApiCard = {
     apiKey?: string
 }
+
+export type TAllowedDomainsSchema = z.infer<typeof allowedDomainsSchema>;
