@@ -1,12 +1,10 @@
 import { notFound } from "next/navigation";
-import { toast } from "sonner";
 
 import type { IProject, TApiKeys } from "@/app/home/project/_types";
 import { serverClient } from "@/utils/supabase/server-client";
 
 import ApiKeyCard from "@/app/home/project/[code]/_components/api-key-card";
 import TestApiCard from "@/app/home/project/[code]/_components/test-api-card";
-
 
 const Project = async ({ params }: IProject) => {
     const { code } = await params;
@@ -15,13 +13,11 @@ const Project = async ({ params }: IProject) => {
 
     const supabase = await serverClient()
 
-    const { data, error } = await supabase
+    const { data } = await supabase
         .from('api_keys')
         .select('*')
         .eq('project_code', code)
         .single<TApiKeys>()
-
-    if (error) toast.error(error.message)
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">
