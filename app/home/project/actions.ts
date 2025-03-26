@@ -9,7 +9,6 @@ import { generateApiToken } from "@/utils/misc/generate-api-token"
 
 import type { TNewProjectSchema } from "@/app/home/project/new/_components/create-new-project-form"
 import type { TAllowedDomainsSchema } from "@/app/home/project/_types"
-import { parseDomainLinks } from "@/utils/misc/parse-domain-links"
 
 export const createNewProject = async (formData: TNewProjectSchema) => {
 
@@ -39,7 +38,9 @@ export const createNewProject = async (formData: TNewProjectSchema) => {
         .from('api_keys')
         .insert({
             project_id: projectData?.project_id,
-            api_key: generatedApiToken
+            project_code: projectData?.project_code,
+            api_key: generatedApiToken,
+
         })
 
     if (apiError) throw new Error(apiError.message)
