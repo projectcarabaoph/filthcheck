@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from 'sonner';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,12 +18,14 @@ import { Input } from "@/components/ui/input";
 import type { TAllowedDomainsSchema } from '@/app/home/project/_types';
 import { allowedDomainsSchema } from '@/app/home/project/_lib/schemas';
 
-interface IAllowedDomainsCard {
+import { updateAllowedDomains } from '@/app/home/project/actions';
+
+export interface IAllowedDomainsCard {
     domains?: string[];
     project_id?: string
 }
 
-export default function AllowedDomainsCard({ domains }: IAllowedDomainsCard) {
+export default function AllowedDomainsCard({ domains, project_id }: IAllowedDomainsCard) {
 
     const maxDomainLength: number = 2
 
@@ -52,7 +55,18 @@ export default function AllowedDomainsCard({ domains }: IAllowedDomainsCard) {
 
 
     const onSubmit = (data: TAllowedDomainsSchema) => {
-        console.log("Submitted Data:", data);
+        try {
+
+            const formData = new FormData()
+            formData.append("socials", JSON.stringify(data.domains.map((d) => d.domain)));
+            formData.append('project_id', project_id as string)
+
+            updateAllowedDomains(formData)
+
+        } catch (error) {
+            if (error instanceof Error) toast.error(error.message)
+
+        }
     };
 
     return (
