@@ -19,7 +19,7 @@ import paths from '@/utils/paths/paths.config';
 
 export default function AppCard({ data }: { data: TAppCard }) {
 
-    const { title, description, plan, pattern, code } = data
+    const { title, description, plan, pattern, project_code } = data
 
     const router = useRouter()
 
@@ -27,7 +27,7 @@ export default function AppCard({ data }: { data: TAppCard }) {
         router.push(url)
     }
 
-    const newUrl = replacePlaceholders(paths.app.project, { code })
+    const newUrl = replacePlaceholders(paths.app.project, { project_code })
 
     return (
         <Link key={data.title} href={newUrl} >
