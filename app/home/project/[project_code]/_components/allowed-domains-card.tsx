@@ -78,11 +78,11 @@ export default function AllowedDomainsCard({ domains, project_id }: IAllowedDoma
             <CardContent>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
                     {fields.map((field, index) => (
-                        <div key={field.id} className='flex flex-col  gap-2'>
+                        <div key={field.id} className='flex flex-col gap-2'>
                             <Input
                                 {...register(`domains.${index}.domain`)}
                                 placeholder="www.example-domain.com"
-                                className="pr-12 font-mono text-sm bg-secondary/50"
+                                className="font-mono text-sm bg-secondary/50"
                             />
 
                             {errors.domains?.[index]?.domain && (
