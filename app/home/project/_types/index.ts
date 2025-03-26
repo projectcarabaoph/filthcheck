@@ -2,7 +2,7 @@ import type { z } from 'zod'
 import type { allowedDomainsSchema, testApiCardSchema } from '@/app/home/project/_lib/schemas';
 
 export interface IProject {
-    params: { code: string }; // Get code from URL
+    params: { project_code: string }; // Get project_code from URL
 }
 
 export type TApiKeys = {

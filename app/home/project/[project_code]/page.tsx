@@ -4,22 +4,24 @@ import { serverClient } from "@/utils/supabase/server-client";
 
 import type { IProject, TApiKeys } from "@/app/home/project/_types";
 
-import ApiKeyCard from "@/app/home/project/[code]/_components/api-key-card";
-import TestApiCard from "@/app/home/project/[code]/_components/test-api-card";
-import AllowedDomainsCard from "@/app/home/project/[code]/_components/allowed-domains-card";
+import ApiKeyCard from "@/app/home/project/[project_code]/_components/api-key-card";
+import TestApiCard from "@/app/home/project/[project_code]/_components/test-api-card";
+import AllowedDomainsCard from "@/app/home/project/[project_code]/_components/allowed-domains-card";
 
 const Project = async ({ params }: IProject) => {
-    const { code } = await params;
+    const { project_code } = await params;
 
-    if (!code) return notFound();
+    if (!project_code) return notFound();
 
     const supabase = await serverClient()
 
     const { data } = await supabase
         .from('api_keys')
         .select('*')
-        .eq('project_code', code)
+        .eq('project_code', project_code)
         .single<TApiKeys>()
+
+    console.log(data)
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">

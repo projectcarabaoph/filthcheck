@@ -8,5 +8,5 @@ export type TAppCard = {
     created_at: string,
     updated_at: string,
     pattern: string,
-    code: string
+    project_code: string
 }

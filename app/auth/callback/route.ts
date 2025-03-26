@@ -9,11 +9,11 @@ export async function GET(request: NextRequest) {
     const keys = clientKeys()
     const requestUrl = new URL(request.url)
 
-    const code = requestUrl.searchParams.get("code")
+    const project_code = requestUrl.searchParams.get("project_code")
 
-    if (code) {
+    if (project_code) {
         const supabase = await serverClient()
-        await supabase.auth.exchangeCodeForSession(code)
+        await supabase.auth.exchangeCodeForSession(project_code)
     }
     return NextResponse.redirect(
         new URL(paths.app.home, keys.devBaseURL)
