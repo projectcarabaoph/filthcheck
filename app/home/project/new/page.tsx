@@ -1,3 +1,4 @@
+
 import CreateNewProjecForm from "@/app/home/project/new/_components/create-new-project-form"
 
 const NewProject = () => {
@@ -74,6 +75,7 @@ const NewProject = () => {
                 </div>
             </div>
             )
+
 }
 
             export default NewProject
