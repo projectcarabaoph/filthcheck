@@ -8,6 +8,8 @@ import { generateRandomPattern } from "@/utils/misc/generate-random-pattern"
 import { generateApiToken } from "@/utils/misc/generate-api-token"
 
 import type { TNewProjectSchema } from "@/app/home/project/new/_components/create-new-project-form"
+import type { TAllowedDomainsSchema } from "@/app/home/project/_types"
+import { parseDomainLinks } from "@/utils/misc/parse-domain-links"
 
 export const createNewProject = async (formData: TNewProjectSchema) => {
 
@@ -46,4 +48,21 @@ export const createNewProject = async (formData: TNewProjectSchema) => {
     revalidatePath(paths.app.home)
     return apiData
 
+}
+
+
+export const updateAllowedDomains = async (formData: TAllowedDomainsSchema & { project_id: string }) => {
+
+    const supabase = await serverClient()
+
+    const { data: domainData, error: domainError } = await supabase
+        .from('api_keys')
+        .update({
+            domains: formData.domains
+        })
+        .eq('project_id', formData.project_id)
+
+    if (domainError) throw new Error(domainError.message)
+
+    return domainData
 }
