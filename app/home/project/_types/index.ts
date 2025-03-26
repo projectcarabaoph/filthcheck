@@ -13,7 +13,7 @@ export type TApiKeys = {
     project_code: string,
     created_at: string,
     updated_at: string
-    domains: string[]
+    domains: string
 }
 
 export interface IClassification {

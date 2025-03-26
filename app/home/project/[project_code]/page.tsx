@@ -21,7 +21,7 @@ const Project = async ({ params }: IProject) => {
         .eq('project_code', project_code)
         .single<TApiKeys>()
 
-    console.log(data)
+    const domains = data?.domains.split(',')
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">
@@ -35,7 +35,7 @@ const Project = async ({ params }: IProject) => {
                 <div className="flex flex-col gap-2 p-2">
                     <ApiKeyCard apiKey={data?.api_key} />
                     <TestApiCard apiKey={data?.api_key} />
-                    <AllowedDomainsCard domains={data?.domains} project_id={data?.project_id} />
+                    <AllowedDomainsCard domains={domains} project_id={data?.project_id} />
                 </div>
             </div>
         </div>
