@@ -62,7 +62,7 @@ export const updateAllowedDomains = async (formData: FormData) => {
     const { data: domainData, error: domainError } = await supabase
         .from('api_keys')
         .update({
-            domains: domains
+            domains: domains.join(',')
         })
         .eq('project_id', project_id)
 
