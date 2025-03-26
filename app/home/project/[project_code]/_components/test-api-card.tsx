@@ -90,7 +90,7 @@ export default function TestApiCard({
 
                         <button
                             disabled={!isDirty || !isValid || isSubmitting}
-                            className="bg-white px-1 absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                            className="bg-neutral-50 rounded-md px-1 absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                             type="submit"
                         >
                             POST
@@ -100,7 +100,7 @@ export default function TestApiCard({
                 </form>
                 <div className="flex flex-col gap-2 mt-2">
                     <p>Output:</p>
-                    <pre className="bg-indigo-50 rounded-md p-2">
+                    <pre className="bg-neutral-50 outline outline-[1px] outline-neutral-200 rounded-md p-2">
                         {isLoading ? <span>Loading...</span> : <code>{JSON.stringify(output, null, 2)}</code>}
                     </pre>
                 </div>
