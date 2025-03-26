@@ -69,10 +69,11 @@ export default function AllowedDomainsCard({ domains }: IAllowedDomainsCard) {
                                 placeholder="www.example-domain.com"
                                 className="pr-12 font-mono text-sm bg-secondary/50"
                             />
+
                             {errors.domains?.[index]?.domain && (
-                                <p className="text-red-500 text-sm">
+                                <small className="text-red-500 text-sm">
                                     {errors.domains[index].domain.message}
-                                </p>
+                                </small>
                             )}
                         </div>
                     ))}
