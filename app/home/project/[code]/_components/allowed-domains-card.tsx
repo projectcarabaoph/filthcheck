@@ -19,6 +19,7 @@ import { allowedDomainsSchema } from '@/app/home/project/_lib/schemas';
 
 interface IAllowedDomainsCard {
     domains?: string[];
+    project_id?: string
 }
 
 export default function AllowedDomainsCard({ domains }: IAllowedDomainsCard) {

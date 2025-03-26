@@ -33,7 +33,7 @@ const Project = async ({ params }: IProject) => {
                 <div className="flex flex-col gap-2 p-2">
                     <ApiKeyCard apiKey={data?.api_key} />
                     <TestApiCard apiKey={data?.api_key} />
-                    <AllowedDomainsCard domains={data?.domains} />
+                    <AllowedDomainsCard domains={data?.domains} project_id={data?.project_id} />
                 </div>
             </div>
         </div>
