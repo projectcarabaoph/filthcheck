@@ -21,7 +21,7 @@ const Project = async ({ params }: IProject) => {
         .eq('project_code', project_code)
         .single<TApiKeys>()
 
-    const domains = data?.domains.split(',')
+    const domains = data?.domains ? data.domains.split(',') : []
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">
