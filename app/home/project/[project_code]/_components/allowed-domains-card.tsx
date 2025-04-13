@@ -58,7 +58,7 @@ export default function AllowedDomainsCard({ domains, project_id }: IAllowedDoma
         try {
 
             const formData = new FormData()
-            formData.append("domains", JSON.stringify(data.domains.map((d) => d.domain)));
+            formData.append("domains", JSON.stringify(data.domains.map((d) => d.domain.trim())));
             formData.append('project_id', project_id as string)
 
             updateAllowedDomains(formData)
