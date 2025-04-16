@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form'
-import { toast } from "sonner";
 
 import {
     Card,
@@ -14,8 +13,9 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
-import type { IApiResponse, TTestApiCard, TTestApiCardSchema } from "@/app/home/project/_types";
+import type { TTestApiCard, TTestApiCardSchema } from "@/app/home/project/_types";
 import { testApiCardSchema } from "@/app/home/project/_lib/schemas";
+import { usePostImage } from "@/hooks/usePostImage";
 
 
 export default function TestApiCard({
@@ -23,8 +23,9 @@ export default function TestApiCard({
 }: TTestApiCard) {
 
     const [imageURL, setImageURL] = useState<string>('')
-    const [output, setOutput] = useState<IApiResponse>({} as IApiResponse)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+
+    const { postImage, isLoading, output, responseTime } = usePostImage(apiKey)
+
     const {
         register,
         handleSubmit,
@@ -41,34 +42,9 @@ export default function TestApiCard({
     }
 
     const onSubmit = (formData: TTestApiCardSchema) => {
-        postDetectImage(formData.imageURL)
+        postImage(formData.imageURL)
     }
 
-    const postDetectImage = async (imageURL: string) => {
-        setIsLoading(true)
-        setOutput({} as IApiResponse)
-        try {
-            const response = await fetch('http://localhost:4000/api/detect/image', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    'X-FilthCheckAPI-Key': apiKey
-                },
-                body: JSON.stringify({ imageURL })
-            })
-            const data = await response.json()
-
-            if (!response.ok) {
-                throw new Error(data.message)
-            }
-            setOutput(data)
-        } catch (error) {
-            if (error instanceof Error) toast.error(error.message)
-        } finally {
-            setIsLoading(false)
-        }
-    }
 
     return (
         <Card className="w-full glass-card shadow-card overflow-hidden relative transition-all duration-300 hover:shadow-elevated">
@@ -103,6 +79,12 @@ export default function TestApiCard({
                     <pre className="bg-neutral-50 outline outline-[1px] outline-neutral-200 rounded-md p-2">
                         {isLoading ? <span>Loading...</span> : <code>{JSON.stringify(output, null, 2)}</code>}
                     </pre>
+
+
+                    <p className="text-sm text-neutral-600">
+                        Response time: {responseTime !== null ? `${(responseTime / 1000).toFixed(2)}s` : "0"}
+                    </p>
+
                 </div>
             </CardContent>
         </Card>
