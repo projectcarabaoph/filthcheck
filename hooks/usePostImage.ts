@@ -5,14 +5,15 @@ import { toast } from 'sonner'
 
 export function usePostImage(apiKey: string) {
 
-    const [output, setOutput] = useState<IApiResponse | null>(null)
+    const initOutput = ({} as IApiResponse)
+    const [output, setOutput] = useState<IApiResponse>(initOutput)
     const [isLoading, setIsLoading] = useState(false)
 
     const { responseTime, startTimer, stopTimer } = useResponseTimer()
 
     const postImage = async (imageURL: string) => {
         setIsLoading(true)
-        setOutput(null)
+        setOutput(initOutput)
         startTimer()
 
         try {
