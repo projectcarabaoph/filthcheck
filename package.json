@@ -1,7 +1,8 @@
 {
-  "name": "nextjs-supabase-starter-clean",
+  "name": "filthcheck",
   "version": "0.1.0",
   "private": true,
+  "description": "A very simple API for detecting Not Safe For Work (NSFW) Nudity image content",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
