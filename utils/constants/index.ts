@@ -13,13 +13,6 @@ export const featureList: TFeaturesList[] = [
         description:
             "An open-source backend-as-a-service that provides instant APIs, authentication, and a Postgres database.",
     },
-
-    {
-        icon: "simple-icons:express",
-        title: "Express.js",
-        description:
-            "A minimal and flexible Node.js web application framework for building fast and scalable server-side APIs.",
-    },
     {
         icon: "simple-icons:onnx",
         title: "ONNX Runtime",
