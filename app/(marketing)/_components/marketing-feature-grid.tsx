@@ -7,7 +7,7 @@ import { featureList } from '@/utils/constants'
 export default function MarketingFeatureGrid() {
     return (
         <ListComponent
-            className="grid grid-cols-1  lg:grid-cols-2 gap-6 p-4 md:p-8"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6 "
             data={featureList}
             renderItem={(feature) => (
                 <MarketingFeatureCard
