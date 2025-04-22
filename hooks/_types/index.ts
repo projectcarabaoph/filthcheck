@@ -17,3 +17,8 @@ export interface IPaginationReturnValue {
     canPrevPage: boolean;
     paginatedItems: <T>(items: T[]) => T[];
 }
+
+export interface IScreenSize {
+    width: number;
+    height: number;
+}

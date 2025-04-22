@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface IScreenSize {
-  width: number;
-  height: number;
-}
+import type { IScreenSize } from '@/hooks/_types';
 
 const useScreenSize = (): IScreenSize => {
   const [screenSize, setScreenSize] = useState<IScreenSize>({
