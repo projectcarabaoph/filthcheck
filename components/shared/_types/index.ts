@@ -12,3 +12,12 @@ export type TEmptyComponent = {
     action?: React.ReactNode
     icon?: React.ReactNode
 }
+
+export interface IPaginationComponent {
+    currentPage: number;
+    totalPages: number;
+    onPageChange: (page: number) => void;
+    className?: string;
+    showPageNumbers?: boolean;
+    maxVisiblePages?: number;
+}
