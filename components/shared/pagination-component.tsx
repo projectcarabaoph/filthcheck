@@ -73,6 +73,7 @@ export default function PaginationComponent({
 
                     <ListComponent
                         data={pageNumbers}
+                        className="flex flex-row space-x-1"
                         renderItem={(pageNumber) => (
                             <Button
                                 key={pageNumber}
@@ -81,7 +82,7 @@ export default function PaginationComponent({
                                 onClick={() => onPageChange(pageNumber)}
                                 aria-label={`Page ${pageNumber}`}
                                 aria-current={currentPage === pageNumber ? "page" : undefined}
-                                className="hidden sm:inline-flex"
+                                className={cn("hidden sm:inline-flex", currentPage === pageNumber && "bg-custome-pink hover:bg-custome-pink/90")}
                             >
                                 {pageNumber}
                             </Button>
