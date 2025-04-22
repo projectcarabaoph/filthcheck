@@ -25,12 +25,14 @@ const generateMockApiRequests = (count: number): IApiRequest[] => {
                     Math.random() > 0.8 ? 400 : 200;
 
         return {
-            id: `req_${Math.random().toString(36).substring(2, 10)}${index}`,
-            endpoint: endpoints[Math.floor(Math.random() * endpoints.length)],
+            id: `${Math.random().toString(36).substring(2, 10)}${index}`,
+            project_id: `${Math.random().toString(36).substring(2, 10)}${index}`,
+            path: endpoints[Math.floor(Math.random() * endpoints.length)],
             method,
-            status: statusBase + Math.floor(Math.random() * 5),
-            duration: Math.floor(Math.random() * 1000) + 50,
-            timestamp: new Date(Date.now() - Math.random() * 86400000 * 7).toISOString(),
+            status_code: statusBase + Math.floor(Math.random() * 5),
+            response_time_ms: Math.floor(Math.random() * 1000) + 50,
+            ip_address: Array(4).fill(0).map(() => Math.floor(Math.random() * 256)).join('.'),
+            created_at: new Date(Date.now() - Math.random() * 86400000 * 7).toISOString(),
         };
     });
 };

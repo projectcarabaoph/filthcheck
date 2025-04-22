@@ -59,7 +59,6 @@ export default function AnalyticsRequestTable({
             default: return "";
         }
     };
-
     return (
         <div className="space-y-4">
             <div className="rounded-md border shadow-sm">
@@ -68,10 +67,12 @@ export default function AnalyticsRequestTable({
                     <TableHeader>
                         <TableRow className="bg-muted/50">
                             <TableHead className="w-[100px]">ID</TableHead>
-                            <TableHead>Endpoint</TableHead>
+                            <TableHead>Project ID</TableHead>
+                            <TableHead>Path</TableHead>
                             <TableHead>Method</TableHead>
                             <TableHead>Status</TableHead>
-                            <TableHead>Duration</TableHead>
+                            <TableHead>Response Time</TableHead>
+                            <TableHead>IP Address</TableHead>
                             <TableHead className="text-right">Timestamp</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -82,23 +83,35 @@ export default function AnalyticsRequestTable({
 
                             <TableRow key={request.id} className="hover:bg-muted/30">
                                 <TableCell className="font-medium">{request.id.substring(0, 8)}...</TableCell>
-                                <TableCell className="max-w-[200px] truncate font-mono text-xs">{request.endpoint}</TableCell>
+                                <TableCell className="font-medium">{request.project_id}</TableCell>
+                                <TableCell className="max-w-[200px] truncate font-mono text-xs">{request.path}</TableCell>
                                 <TableCell>
                                     <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getMethodBadgeClass(request.method))}>
                                         {request.method}
                                     </span>
                                 </TableCell>
                                 <TableCell>
-                                    <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getStatusBadgeClass(request.status))}>
-                                        {request.status}
+                                    <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getStatusBadgeClass(request.status_code))}>
+                                        {request.status_code}
                                     </span>
                                 </TableCell>
-                                <TableCell>{request.duration}ms</TableCell>
+                                <TableCell>{request.response_time_ms}ms</TableCell>
+                                <TableCell className=" text-muted-foreground text-sm">
+                                    {request.ip_address}
+                                </TableCell>
+
                                 <TableCell className="text-right text-muted-foreground text-sm">
-                                    {new Date(request.timestamp).toLocaleString()}
+                                    {new Date(request.created_at).toLocaleString()}
                                 </TableCell>
                             </TableRow>
                         )}
+                        empty={
+                            <TableRow>
+                                <TableCell colSpan={6} className="h-24 text-center">
+                                    No API requests found.
+                                </TableCell>
+                            </TableRow>
+                        }
                     />
 
                 </Table>

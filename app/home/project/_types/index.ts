@@ -37,11 +37,13 @@ export type TAllowedDomainsSchema = z.infer<typeof allowedDomainsSchema>;
 
 export interface IApiRequest {
     id: string;
-    endpoint: string;
+    project_id: string,
+    path: string;
     method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
-    status: number;
-    duration: number;
-    timestamp: string;
+    status_code: number;
+    response_time_ms: number;
+    ip_address: string;
+    created_at: string;
     requestBody?: string;
     responseBody?: string;
 }
