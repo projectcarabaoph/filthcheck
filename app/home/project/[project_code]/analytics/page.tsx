@@ -8,7 +8,7 @@ const Analytics = () => {
                     <h1 className="text-lg  font-bold text-gray-900 ">
                         Usage Overview
                     </h1>
-                    <span className="text-sm">iew your recent request activity below.</span>
+                    <span className="text-sm">View your recent request activity below.</span>
                 </div>
                 <div className="flex flex-col gap-2 py-2">
                     <AnalyticsUsageStats />
