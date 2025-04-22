@@ -1,4 +1,41 @@
 import AnalyticsUsageStats from "@/app/home/project/[project_code]/analytics/_components/analytics-usage-stats"
+import AnalyticsRequestTable from "@/app/home/project/[project_code]/analytics/_components/analytics-request-table"
+
+import type { IApiRequest } from "@/app/home/project/_types";
+
+// Mock data for the API requests
+const generateMockApiRequests = (count: number): IApiRequest[] => {
+    const methods = ["GET", "POST", "PUT", "DELETE", "PATCH"] as const;
+    const endpoints = [
+        "/",
+        "/api/products",
+        "/api/orders",
+        "/api/auth/login",
+        "/api/auth/register",
+        "/api/payments",
+        "/api/analytics",
+        "/api/settings",
+    ];
+
+    return Array.from({ length: count }).map((_, index) => {
+        const method = methods[Math.floor(Math.random() * methods.length)];
+        const statusBase = method === "GET" ? 200 :
+            method === "POST" ? (Math.random() > 0.7 ? 400 : 201) :
+                method === "DELETE" ? (Math.random() > 0.9 ? 404 : 204) :
+                    Math.random() > 0.8 ? 400 : 200;
+
+        return {
+            id: `req_${Math.random().toString(36).substring(2, 10)}${index}`,
+            endpoint: endpoints[Math.floor(Math.random() * endpoints.length)],
+            method,
+            status: statusBase + Math.floor(Math.random() * 5),
+            duration: Math.floor(Math.random() * 1000) + 50,
+            timestamp: new Date(Date.now() - Math.random() * 86400000 * 7).toISOString(),
+        };
+    });
+};
+
+const mockApiRequests = generateMockApiRequests(35);
 
 const Analytics = () => {
     return (
@@ -12,6 +49,11 @@ const Analytics = () => {
                 </div>
                 <div className="flex flex-col gap-2 py-2">
                     <AnalyticsUsageStats />
+                    <AnalyticsRequestTable
+                        requests={mockApiRequests}
+                        pageSize={8}
+                        caption="Recent API requests from the last 7 days"
+                    />
                 </div>
             </div>
         </div>
