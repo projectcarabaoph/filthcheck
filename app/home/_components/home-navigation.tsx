@@ -9,7 +9,7 @@ import paths from "@/utils/paths/paths.config";
 import { useUser } from "@/context/user-context";
 
 import { homeNavLinks } from "@/utils/constants/navlinks";
-import useScreenSize from "@/hooks/useScreenSize";
+import useScreenSize from "@/hooks/use-screen-size";
 
 import {
     Avatar,

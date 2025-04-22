@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 
 import type { TTestApiCard, TTestApiCardSchema } from "@/app/home/project/_types";
 import { testApiCardSchema } from "@/app/home/project/_lib/schemas";
-import { usePostImage } from "@/hooks/usePostImage";
+import { usePostImage } from "@/hooks/use-post-image";
 
 
 export default function TestApiCard({

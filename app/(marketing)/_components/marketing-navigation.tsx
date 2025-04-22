@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import paths from '@/utils/paths/paths.config';
 import { AvatarHolderSvg } from '@/public/assets/svgs';
-import useScreenSize from '@/hooks/useScreenSize';
+import useScreenSize from '@/hooks/use-screen-size';
 
 const MarketingNavigation = () => {
 

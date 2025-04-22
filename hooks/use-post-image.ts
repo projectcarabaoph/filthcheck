@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useResponseTimer from '@/hooks/useResponseTimer'
+import useResponseTimer from '@/hooks/use-response-timer'
 import type { IApiResponse } from '@/app/home/project/_types'
 import { toast } from 'sonner'
 
