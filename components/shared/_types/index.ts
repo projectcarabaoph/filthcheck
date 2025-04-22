@@ -3,6 +3,7 @@ export type TListComponent<T> = {
     className?: string;
     data: T[];
     renderItem: (item: T, index: number) => React.ReactNode;
+    empty: React.ReactNode
 };
 
 export type TEmptyComponent = {

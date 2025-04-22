@@ -5,10 +5,13 @@ export default function ListComponent<T>({
     className,
     data,
     renderItem,
+    empty
 }: TListComponent<T>) {
     return (
         <Component className={className}>
-            {data.map((item, index) => renderItem(item, index))}
+            {data.length > 0
+                ? data.map((item, index) => renderItem(item, index))
+                : empty ?? null}
         </Component>
     );
 }
