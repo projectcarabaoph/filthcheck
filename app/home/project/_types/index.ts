@@ -37,7 +37,7 @@ export type TAllowedDomainsSchema = z.infer<typeof allowedDomainsSchema>;
 
 export interface IApiRequest {
     id: string;
-    project_id: string,
+    project_code: string,
     path: string;
     method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
     status_code: number;
@@ -52,4 +52,8 @@ export interface IAnalyticsRequestTable {
     requests: IApiRequest[];
     pageSize?: number;
     caption?: string;
+}
+
+export interface IAnalytics {
+    params: { project_code: string };
 }

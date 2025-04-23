@@ -67,7 +67,7 @@ export default function AnalyticsRequestTable({
                     <TableHeader>
                         <TableRow className="bg-muted/50">
                             <TableHead className="w-[100px]">ID</TableHead>
-                            <TableHead>Project ID</TableHead>
+                            <TableHead>Project Code</TableHead>
                             <TableHead>Path</TableHead>
                             <TableHead>Method</TableHead>
                             <TableHead>Status</TableHead>
@@ -80,10 +80,9 @@ export default function AnalyticsRequestTable({
                         as="tbody"
                         data={currentRequests}
                         renderItem={(request) => (
-
                             <TableRow key={request.id} className="hover:bg-muted/30">
                                 <TableCell className="font-medium">{request.id.substring(0, 8)}...</TableCell>
-                                <TableCell className="font-medium">{request.project_id}</TableCell>
+                                <TableCell className="font-medium">{request.project_code}</TableCell>
                                 <TableCell className="max-w-[200px] truncate font-mono text-xs">{request.path}</TableCell>
                                 <TableCell>
                                     <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getMethodBadgeClass(request.method))}>
@@ -107,7 +106,7 @@ export default function AnalyticsRequestTable({
                         )}
                         empty={
                             <TableRow>
-                                <TableCell colSpan={6} className="h-24 text-center">
+                                <TableCell colSpan={8} className="h-24 text-center">
                                     No API requests found.
                                 </TableCell>
                             </TableRow>
