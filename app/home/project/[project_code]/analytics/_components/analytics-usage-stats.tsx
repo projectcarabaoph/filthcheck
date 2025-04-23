@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/card"
 
 import type { IAnalyticsUsageStats, IApiRequest, TSummary } from "@/app/home/project/_types"
+import { formatResponseTime } from "@/utils/misc/format-response-time";
 
 
 function processChartData(requests: IApiRequest[]): TSummary[] {
@@ -76,22 +77,22 @@ export default function AnalyticsUsageStats({ requests, className }: IAnalyticsU
                 <div className="flex flex-col sm:flex-row">
                     <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-l sm:border-t-0 sm:px-8 sm:py-6">
                         <span className="text-xs text-muted-foreground">Total Requests</span>
-                        <span className="text-lg font-bold leading-none sm:text-3xl">
+                        <span className="text-lg font-bold leading-none sm:text-2xl">
                             {totalRequests}
                         </span>
                     </div>
 
                     <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-l sm:border-t-0 sm:px-8 sm:py-6">
                         <span className="text-xs text-muted-foreground">Success Rate</span>
-                        <span className="text-lg font-bold leading-none sm:text-3xl">
+                        <span className="text-lg font-bold leading-none sm:text-2xl">
                             {successRate.toFixed(1)}%
                         </span>
                     </div>
 
                     <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-l sm:border-t-0 sm:px-8 sm:py-6">
                         <span className="text-xs text-muted-foreground">Avg Response</span>
-                        <span className="text-lg font-bold leading-none sm:text-3xl">
-                            {avgResponseTime.toFixed(0)}ms
+                        <span className="text-lg font-bold leading-none sm:text-2xl">
+                            {formatResponseTime(avgResponseTime)}
                         </span>
                     </div>
                 </div>
