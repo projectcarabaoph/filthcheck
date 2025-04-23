@@ -85,7 +85,7 @@ export default function AnalyticsRequestTable({
     return (
         <div className="space-y-4">
             <div className="rounded-md border shadow-sm">
-                <div className="px-4 py-3 flex flex-col gap-2">
+                <div className="pl-6 py-3 flex flex-col gap-2">
                     <h2 className="font-semibold leading-none tracking-tight">Request Logs</h2>
                     <p className="text-sm text-muted-foreground">{caption}</p>
                 </div>
