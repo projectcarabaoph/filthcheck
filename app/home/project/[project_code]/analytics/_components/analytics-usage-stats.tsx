@@ -5,25 +5,9 @@ import { Icon } from '@iconify/react'
 
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import type { TooltipProps } from 'recharts';
 
 import { cn } from "@/lib/utils";
-
-
-const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
-    if (active && payload && payload.length) {
-        return (
-            <div className="glass-card p-2 shadow-lg border border-border/40 text-sm">
-                <p className="font-medium">{label}</p>
-                <p className="text-primary font-medium">
-                    {`${(payload[0].value as number).toLocaleString()} requests`}
-                </p>
-            </div>
-        );
-    }
-
-    return null;
-};
+import AnalyticsCustomTooltip from "@/app/home/project/[project_code]/analytics/_components/analytics-custom-tooltip";
 
 type TimeRange = "7d" | "14d" | "30d";
 
@@ -155,7 +139,7 @@ export default function AnalyticsUsageStats({ className }: TUsageStats) {
                                 width={40}
                             />
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
-                            <Tooltip content={<CustomTooltip />} />
+                            <Tooltip content={<AnalyticsCustomTooltip />} />
                             <Line
                                 type="monotone"
                                 dataKey="requests"
