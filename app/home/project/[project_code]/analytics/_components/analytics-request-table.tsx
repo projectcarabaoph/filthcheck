@@ -1,8 +1,11 @@
 'use client'
 
+
+import { format } from 'date-fns'
+
+
 import {
     Table,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -10,13 +13,33 @@ import {
 } from "@/components/ui/table";
 
 import PaginationComponent from "@/components/shared/pagination-component";
+import ListComponent from "@/components/shared/list-component";
+
 import type { IAnalyticsRequestTable, IApiRequest } from "@/app/home/project/_types";
 
 import usePagination from "@/hooks/use-pagination";
 
 import { cn } from "@/lib/utils";
-import ListComponent from "@/components/shared/list-component";
 
+
+
+function formatResponseTime(ms: number): string {
+    if (ms < 1000) {
+        return `${ms.toFixed(0)} ms`;
+    } else if (ms < 60000) {
+        const seconds = (ms / 1000).toFixed(2);
+        return `${seconds} s`;
+    } else if (ms < 3600000) {
+        const minutes = (ms / 60000).toFixed(2);
+        return `${minutes} m`;
+    } else if (ms < 86400000) {
+        const hours = (ms / 3600000).toFixed(2);
+        return `${hours} h`;
+    } else {
+        const days = (ms / 86400000).toFixed(2);
+        return `${days} d`;
+    }
+}
 
 export default function AnalyticsRequestTable({
     requests,
@@ -62,59 +85,64 @@ export default function AnalyticsRequestTable({
     return (
         <div className="space-y-4">
             <div className="rounded-md border shadow-sm">
-                <Table>
-                    {caption && <TableCaption className="pb-4">{caption}</TableCaption>}
-                    <TableHeader>
-                        <TableRow className="bg-muted/50">
-                            <TableHead className="w-[100px]">ID</TableHead>
-                            <TableHead>Project Code</TableHead>
-                            <TableHead>Path</TableHead>
-                            <TableHead>Method</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Response Time</TableHead>
-                            <TableHead>IP Address</TableHead>
-                            <TableHead className="text-right">Timestamp</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <ListComponent
-                        as="tbody"
-                        data={currentRequests}
-                        renderItem={(request) => (
-                            <TableRow key={request.id} className="hover:bg-muted/30">
-                                <TableCell className="font-medium">{request.id.substring(0, 8)}...</TableCell>
-                                <TableCell className="font-medium">{request.project_code}</TableCell>
-                                <TableCell className="max-w-[200px] truncate font-mono text-xs">{request.path}</TableCell>
-                                <TableCell>
-                                    <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getMethodBadgeClass(request.method))}>
-                                        {request.method}
-                                    </span>
-                                </TableCell>
-                                <TableCell>
-                                    <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getStatusBadgeClass(request.status_code))}>
-                                        {request.status_code}
-                                    </span>
-                                </TableCell>
-                                <TableCell>{request.response_time_ms}ms</TableCell>
-                                <TableCell className=" text-muted-foreground text-sm">
-                                    {request.ip_address}
-                                </TableCell>
+                <div className="px-4 py-3 flex flex-col gap-2">
+                    <h2 className="font-semibold leading-none tracking-tight">Request Logs</h2>
+                    <p className="text-sm text-muted-foreground">{caption}</p>
+                </div>
 
-                                <TableCell className="text-right text-muted-foreground text-sm">
-                                    {new Date(request.created_at).toLocaleString()}
-                                </TableCell>
+                <div className="overflow-x-auto">
+                    <Table>
+                        <TableHeader>
+                            <TableRow className="bg-muted/50">
+                                <TableHead className="w-[100px]">Project Code</TableHead>
+                                <TableHead>Path</TableHead>
+                                <TableHead>Method</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead>Response Time</TableHead>
+                                <TableHead>IP Address</TableHead>
+                                <TableHead className="text-right">Timestamp</TableHead>
                             </TableRow>
-                        )}
-                        empty={
-                            <TableRow>
-                                <TableCell colSpan={8} className="h-24 text-center">
-                                    No API requests found.
-                                </TableCell>
-                            </TableRow>
-                        }
-                    />
+                        </TableHeader>
 
-                </Table>
+                        <ListComponent
+                            as="tbody"
+                            data={currentRequests}
+                            renderItem={(request) => (
+                                <TableRow key={request.id} className="hover:bg-muted/30">
+                                    <TableCell className="font-medium">{request.project_code}</TableCell>
+                                    <TableCell className="max-w-[200px] truncate font-mono text-xs">{request.path}</TableCell>
+                                    <TableCell>
+                                        <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getMethodBadgeClass(request.method))}>
+                                            {request.method}
+                                        </span>
+                                    </TableCell>
+                                    <TableCell>
+                                        <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getStatusBadgeClass(request.status_code))}>
+                                            {request.status_code}
+                                        </span>
+                                    </TableCell>
+                                    <TableCell>{formatResponseTime(request.response_time_ms)}</TableCell>
+                                    <TableCell className="text-muted-foreground text-sm">
+                                        {request.ip_address}
+                                    </TableCell>
+
+                                    <TableCell className="text-right text-muted-foreground text-sm">
+                                        {format(new Date(request.created_at), 'MMM dd, yyyy hh:mm:ss aa')}
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            empty={
+                                <TableRow>
+                                    <TableCell colSpan={7} className="h-24 text-center">
+                                        No API requests found.
+                                    </TableCell>
+                                </TableRow>
+                            }
+                        />
+                    </Table>
+                </div>
             </div>
+
 
             {requests.length > 0 && (
                 <PaginationComponent

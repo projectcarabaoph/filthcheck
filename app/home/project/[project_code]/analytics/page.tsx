@@ -32,7 +32,7 @@ const Analytics = async ({ params }: IAnalytics) => {
                     <AnalyticsUsageStats requests={data as IApiRequest[]} />
                     <AnalyticsRequestTable
                         requests={data as IApiRequest[]}
-                        pageSize={10}
+                        pageSize={5}
                         caption="Recent API requests"
                     />
                 </div>
