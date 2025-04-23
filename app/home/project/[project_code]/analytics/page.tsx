@@ -29,7 +29,7 @@ const Analytics = async ({ params }: IAnalytics) => {
                     <span className="text-sm">View your recent request activity below.</span>
                 </div>
                 <div className="flex flex-col gap-2 py-2">
-                    <AnalyticsUsageStats />
+                    <AnalyticsUsageStats requests={data as IApiRequest[]} />
                     <AnalyticsRequestTable
                         requests={data as IApiRequest[]}
                         pageSize={10}

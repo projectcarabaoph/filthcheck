@@ -1,161 +1,141 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
-import { Icon } from '@iconify/react'
+import {
+    Bar,
+    BarChart,
+    CartesianGrid,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis
+} from "recharts"
 
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
 
-import { cn } from "@/lib/utils";
-import AnalyticsCustomTooltip from "@/app/home/project/[project_code]/analytics/_components/analytics-custom-tooltip";
+import type { IAnalyticsUsageStats, IApiRequest, TSummary } from "@/app/home/project/_types"
 
-type TimeRange = "7d" | "14d" | "30d";
 
-interface TUsageStats {
-    className?: string;
+function processChartData(requests: IApiRequest[]): TSummary[] {
+    if (!Array.isArray(requests)) return [];
+
+    const dailyData: Record<string, TSummary> = {};
+
+    for (const request of requests) {
+        const dateString = new Date(request.created_at).toISOString().split("T")[0];
+
+        const entry = dailyData[dateString] ?? (dailyData[dateString] = {
+            date: dateString,
+            count: 0,
+            success: 0,
+            error: 0,
+            avgResponseTime: 0,
+            totalResponseTime: 0,
+        });
+
+        entry.count++;
+        entry.totalResponseTime += request.response_time_ms;
+        entry.avgResponseTime = entry.totalResponseTime / entry.count;
+
+        if (request.status_code >= 200 && request.status_code < 300) {
+            entry.success++;
+        } else {
+            entry.error++;
+        }
+    }
+
+    return Object.values(dailyData).sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
 }
 
-export default function AnalyticsUsageStats({ className }: TUsageStats) {
-    const [timeRange, setTimeRange] = useState<TimeRange>("7d");
-    const [isIncreasing, setIsIncreasing] = useState<boolean>(false)
-    const [data, setData] = useState<{ date: string; requests: number }[]>([]);
 
 
-    const handleRangeChange = (range: TimeRange) => {
-        setTimeRange(range);
-    };
+export default function AnalyticsUsageStats({ requests, className }: IAnalyticsUsageStats) {
 
-    useEffect(() => {
-        const generateData = (days: number) => {
-            const d = [];
-            for (let i = 0; i < days; i++) {
-                const date = new Date();
-                date.setDate(date.getDate() - (days - 1 - i));
-                d.push({
-                    date: date.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-                    requests: Math.floor(Math.random() * 500) + 500,
-                });
-            }
-            return d;
-        };
-
-        const days = timeRange === "7d" ? 7 : timeRange === "14d" ? 14 : 30;
-        setData(generateData(days));
-        setIsIncreasing(true)
-    }, [timeRange]);
-
-    const totalRequests = data.reduce((sum, item) => sum + item.requests, 0);
-    const percentChange = 10;
+    const chartData = processChartData(requests);
+    const totalRequests = requests.length;
+    const successRate = requests.filter(r => r.status_code >= 200 && r.status_code < 300).length / totalRequests * 100;
+    const avgResponseTime = requests.reduce((sum, r) => sum + r.response_time_ms, 0) / totalRequests;
 
     return (
-        <Card className={cn("glass-card shadow-card  overflow-hidden", className)}>
-            <CardHeader className="pb-2">
-                <div className="flex flex-col sm:flex-row gap-8 items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                        <div>
-                            <CardTitle className="text-lg font-medium text-center sm:text-left">API Usage</CardTitle>
-                            <CardDescription>Requests over time</CardDescription>
-                        </div>
+        <Card className={className}>
+            <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
+                <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
+                    <CardTitle>API Requests</CardTitle>
+                    <CardDescription>
+                        Request history for the last {chartData.length} days
+                    </CardDescription>
+                </div>
+
+                <div className="flex flex-col sm:flex-row">
+                    <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-l sm:border-t-0 sm:px-8 sm:py-6">
+                        <span className="text-xs text-muted-foreground">Total Requests</span>
+                        <span className="text-lg font-bold leading-none sm:text-3xl">
+                            {totalRequests}
+                        </span>
                     </div>
 
-                    <div className="flex items-center text-sm font-medium">
-                        <button
-                            className={cn(
-                                "px-2 py-1 rounded transition-colors",
-                                timeRange === "7d" ? "bg-custome-pink text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-                            )}
-                            onClick={() => handleRangeChange("7d")}
-                        >
-                            7D
-                        </button>
-                        <button
-                            className={cn(
-                                "px-2 py-1 rounded transition-colors",
-                                timeRange === "14d" ? "bg-custome-pink text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-                            )}
-                            onClick={() => handleRangeChange("14d")}
-                        >
-                            14D
-                        </button>
-                        <button
-                            className={cn(
-                                "px-2 py-1 rounded transition-colors",
-                                timeRange === "30d" ? "bg-custome-pink text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-                            )}
-                            onClick={() => handleRangeChange("30d")}
-                        >
-                            30D
-                        </button>
+                    <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-l sm:border-t-0 sm:px-8 sm:py-6">
+                        <span className="text-xs text-muted-foreground">Success Rate</span>
+                        <span className="text-lg font-bold leading-none sm:text-3xl">
+                            {successRate.toFixed(1)}%
+                        </span>
+                    </div>
+
+                    <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-l sm:border-t-0 sm:px-8 sm:py-6">
+                        <span className="text-xs text-muted-foreground">Avg Response</span>
+                        <span className="text-lg font-bold leading-none sm:text-3xl">
+                            {avgResponseTime.toFixed(0)}ms
+                        </span>
                     </div>
                 </div>
             </CardHeader>
-            <CardContent className="px-2 pb-4">
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-4">
-                    <div className="bg-background/50 rounded-lg border border-border/30 p-3">
-                        <div className="flex items-center justify-between">
-                            <p className="text-sm font-medium text-muted-foreground">Total Requests</p>
-                            <Icon icon="" className="h-4 w-4 text-custome-pink" />
-                        </div>
-                        <div className="mt-1 flex items-baseline justify-between">
-                            <h4 className="text-2xl font-semibold">{totalRequests.toString()}</h4>
-                            <span className={cn(
-                                "flex items-center text-xs font-medium",
-                                isIncreasing ? "text-green-600" : "text-red-600"
-                            )}>
-                                {isIncreasing ? (
-                                    <Icon icon="ri:arrow-right-up-line" className="mr-1 h-3 w-3 " />
-                                ) : (
-                                    <Icon icon="ri:arrow-right-down-line" className="mr-1 h-3 w-3 " />
-                                )}
-                                {Math.abs(percentChange)}%
-                            </span>
-                        </div>
-                    </div>
-                </div>
 
-                <div className="h-[250px] w-full">
+            <CardContent className="p-6">
+                <div className="w-full h-[300px] sm:h-[400px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart
-                            data={data}
-                            margin={{ top: 5, right: 30, left: 10, bottom: 5 }}
-                        >
-                            <defs>
-                                <linearGradient x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="black" stopOpacity={0.3} />
-                                    <stop offset="95%" stopColor="black" stopOpacity={0} />
-                                </linearGradient>
-                            </defs>
+                        <BarChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                            <CartesianGrid strokeDasharray="3 3" />
                             <XAxis
                                 dataKey="date"
-                                axisLine={false}
-                                tickLine={false}
-                                tick={{ fontSize: 12 }}
-                                dy={10}
+                                tickFormatter={(value) => {
+                                    const date = new Date(value);
+                                    return date.toLocaleDateString("en-US", {
+                                        month: "short",
+                                        day: "numeric"
+                                    });
+                                }}
                             />
-                            <YAxis
-                                axisLine={false}
-                                tickLine={false}
-                                tick={{ fontSize: 12 }}
-                                width={40}
+                            <YAxis />
+                            <Tooltip
+                                formatter={(value, name) => {
+                                    if (name === 'avgResponseTime') {
+                                        return [`${Number(value).toFixed(0)}ms`, "Avg Response Time"];
+                                    }
+                                    return [value, name === 'count' ? 'Total Requests' : name];
+                                }}
+                                labelFormatter={(value) => {
+                                    return new Date(value).toLocaleDateString("en-US", {
+                                        month: "short",
+                                        day: "numeric",
+                                        year: "numeric"
+                                    });
+                                }}
                             />
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
-                            <Tooltip content={<AnalyticsCustomTooltip />} />
-                            <Line
-                                type="monotone"
-                                dataKey="requests"
-                                stroke="#FF4E88"
-                                strokeWidth={2}
-                                dot={false}
-                                activeDot={{ r: 6, stroke: "#FF4E88", strokeWidth: 2 }}
-                                fillOpacity={1}
-                                fill="#000"
-                            />
-                        </LineChart>
+                            <Bar dataKey="count" fill="#8884d8" name="Total Requests" />
+                            <Bar dataKey="success" fill="#82ca9d" name="Successful" />
+                            <Bar dataKey="error" fill="#ff8042" name="Errors" />
+                        </BarChart>
                     </ResponsiveContainer>
                 </div>
             </CardContent>
         </Card>
+
     );
-};
-
-
+}

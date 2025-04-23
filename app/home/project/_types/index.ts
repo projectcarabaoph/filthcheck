@@ -57,3 +57,19 @@ export interface IAnalyticsRequestTable {
 export interface IAnalytics {
     params: { project_code: string };
 }
+
+
+
+export interface IAnalyticsUsageStats {
+    requests: IApiRequest[]
+    className?: string
+}
+
+export type TSummary = {
+    date: string;
+    count: number;
+    success: number;
+    error: number;
+    avgResponseTime: number;
+    totalResponseTime: number;
+};
