@@ -39,8 +39,6 @@ const Project = async ({ params }: IProject) => {
                 </div>
             </div>
         </div>
-
-
     );
 }
 
