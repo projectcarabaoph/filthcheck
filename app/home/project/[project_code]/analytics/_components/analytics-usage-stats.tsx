@@ -66,32 +66,32 @@ export default function AnalyticsUsageStats({ requests, className }: IAnalyticsU
 
     return (
         <Card className={className}>
-            <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
-                <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
+            <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 md:flex-row">
+                <div className="flex flex-1 flex-col justify-center gap-1 px-4 py-5 sm:py-4">
                     <CardTitle>API Requests</CardTitle>
                     <CardDescription>
                         Request history for the last {chartData.length} days
                     </CardDescription>
                 </div>
 
-                <div className="flex flex-col sm:flex-row">
-                    <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-l sm:border-t-0 sm:px-8 sm:py-6">
+                <div className="flex flex-col md:flex-row">
+                    <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-4 py-4 text-left sm:border-l sm:border-t-0  sm:py-4">
                         <span className="text-xs text-muted-foreground">Total Requests</span>
-                        <span className="text-lg font-bold leading-none sm:text-2xl">
+                        <span className="text-lg font-bold leading-none ">
                             {totalRequests}
                         </span>
                     </div>
 
-                    <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-l sm:border-t-0 sm:px-8 sm:py-6">
+                    <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-4 py-4 text-left sm:border-l sm:border-t-0  sm:py-4">
                         <span className="text-xs text-muted-foreground">Success Rate</span>
-                        <span className="text-lg font-bold leading-none sm:text-2xl">
+                        <span className="text-lg font-bold leading-none ">
                             {successRate.toFixed(1)}%
                         </span>
                     </div>
 
-                    <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left sm:border-l sm:border-t-0 sm:px-8 sm:py-6">
-                        <span className="text-xs text-muted-foreground">Avg Response</span>
-                        <span className="text-lg font-bold leading-none sm:text-2xl">
+                    <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-4 py-4 text-left sm:border-l sm:border-t-0  sm:py-4">
+                        <span className="text-xs text-muted-foreground">Avg, Response</span>
+                        <span className="text-lg font-bold leading-none ">
                             {formatResponseTime(avgResponseTime)}
                         </span>
                     </div>
