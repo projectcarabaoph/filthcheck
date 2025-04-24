@@ -38,9 +38,10 @@ export default function HomeNavigation() {
 
     useEffect(() => {
         const md: number = 768
-        if (width >= md) {
-            setIsOpen(false)
-        }
+
+        if (width >= md) setIsOpen(false)
+        if (width < md) setIsAvatarOpen(false)
+
     }, [width])
 
     return (
