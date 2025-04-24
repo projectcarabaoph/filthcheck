@@ -9,19 +9,34 @@ import TestApiCard from "@/app/home/project/[project_code]/_components/test-api-
 import AllowedDomainsCard from "@/app/home/project/[project_code]/_components/allowed-domains-card";
 
 const Project = async ({ params }: IProject) => {
-    const { project_code } = await params;
 
-    if (!project_code) return notFound();
+    const { project_code } = await params;
 
     const supabase = await serverClient()
 
-    const { data } = await supabase
+    let projectQuery = supabase
+        .from('projects')
+        .select('project_code')
+
+    if (project_code) {
+        projectQuery = projectQuery.eq('project_code', project_code);
+    }
+
+    const { data: projectData, error: projectError } = await projectQuery;
+
+    if (projectError || project_code && (projectData.length === 0)) notFound()
+
+    const { data: apiKeyData, error: apiKeyError } = await supabase
         .from('api_keys')
         .select('*')
         .eq('project_code', project_code)
         .single<TApiKeys>()
 
-    const domains = data?.domains ? data.domains.split(',') : []
+    if (apiKeyError) notFound()
+
+    const { api_key, project_id, domains } = apiKeyData
+
+    const domainList = domains ? domains.split(',') : []
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">
@@ -33,9 +48,9 @@ const Project = async ({ params }: IProject) => {
                     <span className="text-sm">Manage your api key information</span>
                 </div>
                 <div className="flex flex-col gap-2 py-2">
-                    <ApiKeyCard apiKey={data?.api_key} />
-                    <AllowedDomainsCard domains={domains} project_id={data?.project_id} />
-                    <TestApiCard apiKey={data?.api_key} />
+                    <ApiKeyCard apiKey={api_key} />
+                    <AllowedDomainsCard domains={domainList} project_id={project_id} />
+                    <TestApiCard apiKey={api_key} />
                 </div>
             </div>
         </div>
