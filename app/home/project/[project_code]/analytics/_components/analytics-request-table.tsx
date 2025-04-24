@@ -67,16 +67,16 @@ export default function AnalyticsRequestTable({
     return (
         <div className="space-y-4">
             <div className="rounded-md border shadow-sm">
-                <div className="pl-6 py-3 flex flex-col gap-2">
+                <div className="pl-4 py-3 flex flex-col gap-2">
                     <h2 className="font-semibold leading-none tracking-tight">Request Logs</h2>
                     <p className="text-sm text-muted-foreground">{caption}</p>
                 </div>
 
                 <div className="overflow-x-auto">
-                    <Table>
-                        <TableHeader>
+                    <Table className='border-collapse'>
+                        <TableHeader className='hidden lg:table-header-group'>
                             <TableRow className="bg-muted/50">
-                                <TableHead className="w-[100px]">Project Code</TableHead>
+                                <TableHead className="md:w-[100px]">Project Code</TableHead>
                                 <TableHead>Path</TableHead>
                                 <TableHead>Method</TableHead>
                                 <TableHead>Status</TableHead>
@@ -90,25 +90,40 @@ export default function AnalyticsRequestTable({
                             as="tbody"
                             data={currentRequests}
                             renderItem={(request) => (
-                                <TableRow key={request.id} className="hover:bg-muted/30">
-                                    <TableCell className="font-medium">{request.project_code}</TableCell>
-                                    <TableCell className="max-w-[200px] truncate font-mono text-xs">{request.path}</TableCell>
-                                    <TableCell>
+                                <TableRow key={request.id} className="`block lg:table-row mb-4 lg:mb-0   p-3 lg:p-0 rounded-md  hover:bg-muted/30">
+                                    <TableCell className="p-3 flex justify-between lg:table-cell" data-label="Project Code">
+                                        <span className="lg:hidden font-bold">Project Code: </span>
+                                        {request.project_code}
+                                    </TableCell>
+                                    <TableCell className="p-3 flex justify-between lg:table-cell" data-label="Path">
+                                        <span className="lg:hidden font-bold">Path: </span>
+                                        <span className='max-w-[200px] truncate font-mono text-xs'>
+                                            {request.path}
+                                        </span>
+                                    </TableCell>
+                                    <TableCell className="p-3 flex justify-between lg:table-cell" data-label="Method">
+                                        <span className="lg:hidden font-bold">Method: </span>
                                         <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getMethodBadgeClass(request.method))}>
                                             {request.method}
                                         </span>
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="p-3 flex justify-between lg:table-cell" data-label="Status">
+                                        <span className="lg:hidden font-bold">Status: </span>
                                         <span className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold", getStatusBadgeClass(request.status_code))}>
                                             {request.status_code}
                                         </span>
                                     </TableCell>
-                                    <TableCell>{formatResponseTime(request.response_time_ms)}</TableCell>
-                                    <TableCell className="text-muted-foreground text-sm">
+                                    <TableCell className="p-3 flex justify-between lg:table-cell" data-label="Response Time">
+                                        <span className="lg:hidden font-bold">Response Time: </span>
+                                        {formatResponseTime(request.response_time_ms)}
+                                    </TableCell>
+                                    <TableCell className="p-3 flex justify-between lg:table-cell text-muted-foreground text-sm" data-label="IP Address">
+                                        <span className="lg:hidden font-bold">Response Time: </span>
                                         {request.ip_address}
                                     </TableCell>
 
-                                    <TableCell className="text-right text-muted-foreground text-sm">
+                                    <TableCell className="p-3 flex justify-between lg:table-cell text-right text-muted-foreground text-sm" data-label="Timestamp">
+                                        <span className="lg:hidden font-bold">Timestamp: </span>
                                         {format(new Date(request.created_at), 'MMM dd, yyyy hh:mm:ss aa')}
                                     </TableCell>
                                 </TableRow>
