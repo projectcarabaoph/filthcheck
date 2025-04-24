@@ -2,17 +2,21 @@
 import "server-only";
 
 import type { ReactNode } from 'react'
+import type { IAnalytics } from "@/app/home/project/_types";
 
-export default async function ProjectLayout({ children }: { children: ReactNode }) {
+import ProjectCodeSideNavigation from "@/app/home/project/[project_code]/_components/project-code-side-navigation";
+
+
+export default async function ProjectCodeLayout({ params, children }: IAnalytics & { children: ReactNode }) {
+    const { project_code } = await params
 
     return (
         <main className="border border-black min-h-[calc(100dvh-64px)] h-auto flex justify-center">
             <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-[280px_1fr] ">
-                <div className="hidden md:flex border border-black">
-                    left
-                </div>
+                <ProjectCodeSideNavigation project_code={project_code} />
                 {children}
             </div>
         </main>
     )
+
 }
