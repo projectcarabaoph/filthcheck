@@ -28,34 +28,49 @@ function processChartData(requests: IApiRequest[]): TSummary[] {
     const dailyData: Record<string, TSummary> = {};
 
     for (const request of requests) {
-        const dateString = new Date(request.created_at).toISOString().split("T")[0];
+        const dateKey = formatDate(request.created_at);
+        const entry = getOrInitSummary(dailyData, dateKey);
 
-        const entry = dailyData[dateString] ?? (dailyData[dateString] = {
-            date: dateString,
-            count: 0,
-            success: 0,
-            error: 0,
-            avgResponseTime: 0,
-            totalResponseTime: 0,
-        });
-
-        entry.count++;
-        entry.totalResponseTime += request.response_time_ms;
-        entry.avgResponseTime = entry.totalResponseTime / entry.count;
-
-        if (request.status_code >= 200 && request.status_code < 300) {
-            entry.success++;
-        } else {
-            entry.error++;
-        }
+        updateSummary(entry, request);
     }
 
-    return Object.values(dailyData).sort(
-        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
+    return sortByDate(Object.values(dailyData));
 }
 
+function formatDate(date: string | Date): string {
+    return new Date(date).toISOString().split('T')[0];
+}
 
+function getOrInitSummary(map: Record<string, TSummary>, date: string): TSummary {
+
+    const entry = map[date] ?? (map[date] = {
+        date: date,
+        count: 0,
+        success: 0,
+        error: 0,
+        avgResponseTime: 0,
+        totalResponseTime: 0,
+    });
+
+
+    return entry;
+}
+
+function updateSummary(entry: TSummary, request: IApiRequest): void {
+    entry.count++;
+    entry.totalResponseTime += request.response_time_ms;
+    entry.avgResponseTime = entry.totalResponseTime / entry.count;
+
+    if (request.status_code >= 200 && request.status_code < 300) {
+        entry.success++;
+    } else {
+        entry.error++;
+    }
+}
+
+function sortByDate(data: TSummary[]): TSummary[] {
+    return data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+}
 
 export default function AnalyticsUsageStats({ requests, className }: IAnalyticsUsageStats) {
 
