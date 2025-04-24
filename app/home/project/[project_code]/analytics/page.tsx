@@ -3,6 +3,7 @@ import AnalyticsRequestTable from "@/app/home/project/[project_code]/analytics/_
 
 import type { IAnalytics, IApiRequest } from "@/app/home/project/_types";
 import { serverClient } from "@/utils/supabase/server-client";
+import { notFound } from "next/navigation";
 
 
 const Analytics = async ({ params }: IAnalytics) => {
@@ -15,6 +16,8 @@ const Analytics = async ({ params }: IAnalytics) => {
         .from('analytics')
         .select('*')
         .eq('project_code', project_code)
+
+    if (!project_code || !data?.length) notFound()
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">
