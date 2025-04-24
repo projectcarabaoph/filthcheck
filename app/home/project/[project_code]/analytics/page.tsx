@@ -16,9 +16,6 @@ const Analytics = async ({ params }: IAnalytics) => {
         .select('*')
         .eq('project_code', project_code)
 
-
-    console.log(data)
-
     return (
         <div className=" flex flex-col items-center  gap-2 ">
             <div className="max-w-7xl w-full p-4 flex flex-col">
