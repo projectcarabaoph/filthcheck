@@ -9,11 +9,6 @@ export const homeNavLinks: THomeNavlinks[] = [
     },
     {
         id: 2,
-        title: 'Analytics',
-        path: paths.app.home
-    },
-    {
-        id: 3,
         title: 'Account',
         path: paths.app.account
     },
