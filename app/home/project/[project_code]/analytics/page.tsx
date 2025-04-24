@@ -12,12 +12,27 @@ const Analytics = async ({ params }: IAnalytics) => {
 
     const supabase = await serverClient()
 
-    const { data } = await supabase
+    let projectQuery = supabase
+        .from('projects')
+        .select('project_code')
+
+    if (project_code) {
+        projectQuery = projectQuery.eq('project_code', project_code);
+    }
+
+    const { data: projectData, error: projectError } = await projectQuery;
+
+
+    if (projectError || project_code && (projectData.length === 0)) notFound()
+
+
+    const { data: analyticData, error: analyticError } = await supabase
         .from('analytics')
         .select('*')
-        .eq('project_code', project_code)
+        .eq('project_code', projectData)
 
-    if (!project_code) notFound()
+
+    if (!project_code || analyticError) notFound()
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">
@@ -29,9 +44,9 @@ const Analytics = async ({ params }: IAnalytics) => {
                     <span className="text-sm">View your recent request activity below.</span>
                 </div>
                 <div className="flex flex-col gap-2 py-2">
-                    <AnalyticsUsageStats requests={data as IApiRequest[]} />
+                    <AnalyticsUsageStats requests={analyticData as IApiRequest[]} />
                     <AnalyticsRequestTable
-                        requests={data as IApiRequest[]}
+                        requests={analyticData as IApiRequest[]}
                         pageSize={5}
                         caption="Recent API requests"
                     />
