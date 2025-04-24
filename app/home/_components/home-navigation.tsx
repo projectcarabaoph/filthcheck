@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/app/auth/actions";
+import ListComponent from "@/components/shared/list-component";
 
 
 export default function HomeNavigation() {
@@ -112,8 +113,10 @@ export default function HomeNavigation() {
             {/* Mobile menu */}
             {isOpen && (
                 <div className="sm:hidden bg-white">
-                    <div className="pt-2 pb-3 space-y-1">
-                        {homeNavLinks.map((link) => (
+                    <ListComponent
+                        data={homeNavLinks}
+                        className="pt-2 pb-3 space-y-1"
+                        renderItem={(link) => (
                             <Link
                                 onClick={() => setIsOpen(!isOpen)}
                                 key={link.id}
@@ -122,9 +125,9 @@ export default function HomeNavigation() {
                             >
                                 {link.title}
                             </Link>
-                        ))}
+                        )}
+                    />
 
-                    </div>
                     <div className="pt-4 pb-3 border-t border-gray-200">
                         <div className=" space-y-1  px-2">
                             <Button onClick={() => signOut()} variant='default' className="w-full text-center py-5 rounded-md border border-custome-pink bg-white text-custome-pink hover:bg-custome-pink hover:text-white">
