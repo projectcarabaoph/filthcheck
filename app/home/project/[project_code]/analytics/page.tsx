@@ -17,7 +17,7 @@ const Analytics = async ({ params }: IAnalytics) => {
         .select('*')
         .eq('project_code', project_code)
 
-    if (!project_code || !data?.length) notFound()
+    if (!project_code) notFound()
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">

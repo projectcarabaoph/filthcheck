@@ -78,21 +78,21 @@ export default function AnalyticsUsageStats({ requests, className }: IAnalyticsU
                     <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-4 py-4 text-left sm:border-l sm:border-t-0  sm:py-4">
                         <span className="text-xs text-muted-foreground">Total Requests</span>
                         <span className="text-lg font-bold leading-none ">
-                            {totalRequests}
+                            {totalRequests || 0}
                         </span>
                     </div>
 
                     <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-4 py-4 text-left sm:border-l sm:border-t-0  sm:py-4">
                         <span className="text-xs text-muted-foreground">Success Rate</span>
                         <span className="text-lg font-bold leading-none ">
-                            {successRate.toFixed(1)}%
+                            {successRate ? successRate.toFixed(1) : 0}%
                         </span>
                     </div>
 
                     <div className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-4 py-4 text-left sm:border-l sm:border-t-0  sm:py-4">
-                        <span className="text-xs text-muted-foreground">Avg, Response</span>
+                        <span className="text-xs text-muted-foreground">Avg. Response</span>
                         <span className="text-lg font-bold leading-none ">
-                            {formatResponseTime(avgResponseTime)}
+                            {formatResponseTime(avgResponseTime || 0)}
                         </span>
                     </div>
                 </div>
