@@ -11,8 +11,8 @@ export default async function ProjectCodeLayout({ params, children }: IAnalytics
     const { project_code } = await params
 
     return (
-        <main className="border border-black min-h-[calc(100dvh-64px)] h-auto flex justify-center">
-            <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-[280px_1fr] ">
+        <main className="min-h-[calc(100dvh-64px)] h-auto flex justify-center">
+            <div className="w-full max-w-7xl grid grid-cols-1 grid-rows-[64px_1fr] md:grid-cols-[280px_1fr] ">
                 <ProjectCodeSideNavigation project_code={project_code} />
                 {children}
             </div>
