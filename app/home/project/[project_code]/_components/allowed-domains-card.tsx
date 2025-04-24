@@ -63,6 +63,8 @@ export default function AllowedDomainsCard({ domains, project_id }: IAllowedDoma
 
             updateAllowedDomains(formData)
 
+            toast.success('Allowed domains updated successfully.')
+
         } catch (error) {
             if (error instanceof Error) toast.error(error.message)
 
