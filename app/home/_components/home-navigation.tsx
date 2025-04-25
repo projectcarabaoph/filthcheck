@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { LogOut, Menu, User, X } from "lucide-react";
-
+// import { Home, LogOut, Menu, User, X } from "lucide-react";
+import { Icon } from '@iconify/react'
 import { AvatarHolderSvg } from "@/public/assets/svgs";
 import paths from "@/utils/paths/paths.config";
 import { useUser } from "@/context/user-context";
@@ -82,12 +82,18 @@ export default function HomeNavigation() {
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator className="bg-slate-200" />
                                     <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent">
-                                        <User className="mr-2 h-4 w-4" />
+                                        {/* <Home className="mr-2 h-4 w-4" /> */}
+                                        <Icon icon="fluent:home-24-regular" className="mr-2 h-4 w-4" />
+                                        <Link href={paths.app.home}>Home</Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuSeparator className="bg-slate-200" />
+                                    <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent">
+                                        <Icon icon="fluent:person-24-regular" className="mr-2 h-4 w-4" />
                                         <Link href={paths.app.account}>Account</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator className="bg-slate-200" />
                                     <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent" onClick={() => signOut()}>
-                                        <LogOut className="mr-2 h-4 w-4" />
+                                        <Icon icon="material-symbols:logout-sharp" className="mr-2 h-4 w-4" />
                                         <span>Sign out</span>
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
@@ -101,9 +107,10 @@ export default function HomeNavigation() {
                             className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
                         >
                             {isOpen ? (
-                                <X className="block h-6 w-6" />
+                                <Icon icon="material-symbols:close" className="block h-6 w-6" />
+
                             ) : (
-                                <Menu className="block h-6 w-6" />
+                                <Icon icon="material-symbols:menu" className="block h-6 w-6" />
                             )}
                         </button>
                     </div>
