@@ -81,18 +81,18 @@ export default function HomeNavigation() {
                                         </div>
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator className="bg-slate-200" />
-                                    <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent">
+                                    <DropdownMenuItem onClick={() => setIsAvatarOpen(false)} className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent">
                                         {/* <Home className="mr-2 h-4 w-4" /> */}
                                         <Icon icon="fluent:home-24-regular" className="mr-2 h-4 w-4" />
                                         <Link href={paths.app.home}>Home</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator className="bg-slate-200" />
-                                    <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent">
+                                    <DropdownMenuItem onClick={() => setIsAvatarOpen(false)} className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent">
                                         <Icon icon="fluent:person-24-regular" className="mr-2 h-4 w-4" />
                                         <Link href={paths.app.account}>Account</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator className="bg-slate-200" />
-                                    <DropdownMenuItem className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent" onClick={() => signOut()}>
+                                    <DropdownMenuItem onClick={() => signOut()} className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent" >
                                         <Icon icon="material-symbols:logout-sharp" className="mr-2 h-4 w-4" />
                                         <span>Sign out</span>
                                     </DropdownMenuItem>
