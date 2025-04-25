@@ -82,7 +82,6 @@ export default function HomeNavigation() {
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator className="bg-slate-200" />
                                     <DropdownMenuItem onClick={() => setIsAvatarOpen(false)} className="text-black focus:text-gray-600 hover:bg-transparent focus:bg-transparent">
-                                        {/* <Home className="mr-2 h-4 w-4" /> */}
                                         <Icon icon="fluent:home-24-regular" className="mr-2 h-4 w-4" />
                                         <Link href={paths.app.home}>Home</Link>
                                     </DropdownMenuItem>
