@@ -3,9 +3,11 @@ import { ArrowRight } from "lucide-react"
 import paths from "@/utils/paths/paths.config"
 import { serverClient } from "@/utils/supabase/server-client"
 
-const MarketingHero = async () => {
+export default async function MarketingHero() {
+
     const supabase = await serverClient()
     const { data: { user } } = await supabase.auth.getUser()
+
     return (
         <div className="relative overflow-hidden flex flex-col items-center  text-center py-20">
             <div className="flex flex-col justify-center items-center w-full max-w-4xl">
@@ -30,4 +32,4 @@ const MarketingHero = async () => {
     )
 }
 
-export default MarketingHero
+
