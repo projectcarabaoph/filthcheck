@@ -9,9 +9,7 @@ import { AvatarHolderSvg } from '@/public/assets/svgs';
 import useScreenSize from '@/hooks/use-screen-size';
 import type { IMarketingNavigation } from '@/app/(marketing)/_types';
 
-
-const MarketingNavigation = ({ user }: IMarketingNavigation) => {
-
+export default function MarketingNavigation({ user }: IMarketingNavigation) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const { width } = useScreenSize()
@@ -82,4 +80,8 @@ const MarketingNavigation = ({ user }: IMarketingNavigation) => {
     )
 }
 
-export default MarketingNavigation
+
+
+
+
+
