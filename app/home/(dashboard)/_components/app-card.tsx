@@ -44,10 +44,10 @@ export default function AppCard({ data }: { data: TAppCard }) {
                     <div className="flex justify-between items-start gap-2">
                         <div>
                             <CardTitle className="text-lg font-semibold line-clamp-1">{title}</CardTitle>
-                            <CardDescription className="mt-1 line-clamp-2 text-sm">{description}</CardDescription>
+                            <CardDescription className="mt-1  text-sm truncate max-w-48">{description}</CardDescription>
                         </div>
 
-                        <Button
+                        {/* <Button
                             variant="ghost"
                             size="sm"
                             className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-full"
@@ -58,7 +58,7 @@ export default function AppCard({ data }: { data: TAppCard }) {
                             }}
                         >
                             <Settings className="w-4 h-4" />
-                        </Button>
+                        </Button> */}
                     </div>
                 </CardHeader>
 
