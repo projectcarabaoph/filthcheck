@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 
 const Analytics = async ({ params }: IAnalytics) => {
 
-    const { project_code } = await params;
+    const { project_code } = params;
 
     const supabase = await serverClient()
 
