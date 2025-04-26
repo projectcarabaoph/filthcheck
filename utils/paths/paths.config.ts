@@ -4,8 +4,8 @@ const PathsSchema = z.object({
   marketing: z.object({
     landing: z.string().min(1),
   }),
-  docs: z.object({
-    landing: z.string().min(1),
+  documentation: z.object({
+    docs: z.string().min(1),
   }),
   auth: z.object({
     signIn: z.string().min(1),
@@ -25,8 +25,8 @@ const paths = PathsSchema.parse({
   marketing: {
     landing: "/",
   },
-  docs: {
-    landing: "/",
+  documentation: {
+    docs: "/docs",
   },
   auth: {
     signIn: "/auth/sign-in",
