@@ -1,9 +1,7 @@
 import type { z } from 'zod'
 import type { allowedDomainsSchema, testApiCardSchema } from '@/app/home/project/_lib/schemas';
 
-export interface IProject {
-    params: { project_code: string }; // Get project_code from URL
-}
+export type IProject = Promise<{ project_code: string }>;
 
 export type TApiKeys = {
     api_key: string,
@@ -54,10 +52,7 @@ export interface IAnalyticsRequestTable {
     caption?: string;
 }
 
-export interface IAnalytics {
-    params: { project_code: string };
-}
-
+export type IAnalytics = Promise<{ project_code: string }>;
 
 
 export interface IAnalyticsUsageStats {

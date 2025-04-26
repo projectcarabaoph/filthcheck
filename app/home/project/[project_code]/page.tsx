@@ -8,9 +8,9 @@ import ApiKeyCard from "@/app/home/project/[project_code]/_components/api-key-ca
 import TestApiCard from "@/app/home/project/[project_code]/_components/test-api-card";
 import AllowedDomainsCard from "@/app/home/project/[project_code]/_components/allowed-domains-card";
 
-const Project = async ({ params }: IProject) => {
+const Project = async (props: { params: IProject }) => {
 
-    const { project_code } = await params;
+    const { project_code } = await props.params;
 
     const supabase = await serverClient()
 
