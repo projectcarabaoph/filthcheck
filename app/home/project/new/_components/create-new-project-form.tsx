@@ -1,9 +1,9 @@
 'use client'
 
-import { z } from 'zod'
+import type { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { RefreshCw, Globe } from 'lucide-react'
+import { RefreshCw, Globe, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { useRouter } from "next/navigation";
 
@@ -12,17 +12,9 @@ import { Button } from '@/components/ui/button'
 
 import { createNewProject } from '@/app/home/project/actions'
 import paths from '@/utils/paths/paths.config'
+import { newProjectSchema } from '@/app/home/project/_lib/schemas'
 
-const newProjectSchema = z.object({
-  title: z.
-    string()
-    .min(1, { message: "Title is required." })
-    .max(50, { message: 'Title cannot exceed 50 characters.' }),
-  description: z
-    .string()
-    .min(1, { message: "Description is required." })
-    .max(200, { message: 'Description cannot exceed 200 characters.' }),
-})
+
 
 export type TNewProjectSchema = z.infer<typeof newProjectSchema>
 
@@ -47,7 +39,7 @@ export default function CreateNewProjecForm() {
       await createNewProject(data)
       toast.success('New project created successfully.')
       reset()
-      router.push(paths.app.home)
+      router.replace(paths.app.home)
     } catch (error) {
       if (error instanceof Error) toast.error(error.message)
     }
@@ -55,71 +47,95 @@ export default function CreateNewProjecForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full p-4 bg-white rounded-lg outline outline-1 outline-slate-200">
-      <div className='flex flex-col gap-1'>
-        <label htmlFor='title' className='text-gray-700 font-medium'>App Title</label>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-6 w-full  p-6 bg-white rounded-xl border border-slate-200 shadow-sm"
+    >
+      <div className='flex flex-col gap-2'>
+        <label htmlFor='title' className='text-gray-700 font-medium text-sm'>App Title</label>
         <div className="relative">
           <Input
             autoComplete='off'
             type='text'
-            className="font-mono text-sm bg-secondary/50"
+            placeholder='My Awesome App'
+            className="font-mono text-sm bg-gray-50 border-gray-200 hover:border-gray-300 focus:bg-white focus:ring-2 focus:ring-pink-200"
             {...register('title')}
           />
         </div>
-        <small className='text-red-500'>{errors.title?.message}</small>
+        {errors.title && (
+          <small className='text-red-500 text-xs'>{errors.title.message}</small>
+        )}
       </div>
 
-      <div className='flex flex-col gap-1'>
-        <label htmlFor='title' className='text-gray-700 font-medium'>Description</label>
+      <div className='flex flex-col gap-2'>
+        <label htmlFor='description' className='text-gray-700 font-medium text-sm'>Description</label>
         <div className="relative">
           <Input
             autoComplete='off'
             type='text'
-            className="font-mono text-sm bg-secondary/50"
+            placeholder='What does your app do?'
+            className="font-mono text-sm bg-gray-50 border-gray-200 hover:border-gray-300 focus:bg-white focus:ring-2 focus:ring-pink-200"
             {...register('description')}
           />
         </div>
-        <small className='text-red-500'>{errors.description?.message}</small>
+        {errors.description && (
+          <small className='text-red-500 text-xs'>{errors.description.message}</small>
+        )}
       </div>
 
-      <div className='flex flex-col gap-1'>
-        <label htmlFor='title' className='text-gray-700 font-medium'>Plan</label>
-
-        <div className=' flex flex-col gap-2 w-full h-full min-h-56  md:max-w-56 max-h-56 rounded-md outline-[1px] outline outline-custome-pink p-4'>
-          <div className='flex flex-row justify-between gap-2 items-center'>
-            <small className='bg-custome-pink text-white p-1 rounded-md'>Free</small>
-            <small>₱0/mo</small>
+      <div className='flex flex-col gap-2'>
+        <label className='text-gray-700 font-medium text-sm'>Plan</label>
+        <div className='flex flex-col gap-3 w-full h-full min-h-[200px] border-2 border-pink-100  rounded-lg p-5'>
+          <div className='flex flex-row justify-between items-center'>
+            <span className={`text-xs font-medium px-2 py-1 rounded-md bg-emerald-100 text-emerald-800'
+                            }`}>
+              FREE
+            </span>
+            <span className='font-medium text-gray-900'>₱0/mo</span>
           </div>
-          <div className='flex flex-col gap-2 mt-4'>
-            <div className='flex flex-row gap-2'>
-              <RefreshCw className='w-5 h-5 text-slate-500' />
-              <p>Unlimited post request</p>
+          <div className='flex flex-col gap-3 mt-2'>
+            <div className='flex items-center gap-3'>
+              <RefreshCw className='w-4 h-4 text-pink-500' />
+              <p className='text-sm text-gray-700'>Unlimited post requests</p>
             </div>
-            <div className='flex flex-row gap-2'>
-              <Globe className='w-5 h-5 text-slate-500' />
-              <p>south-east-1</p>
+            <div className='flex items-center gap-3'>
+              <Globe className='w-4 h-4 text-pink-500' />
+              <p className='text-sm text-gray-700'>South-East Asia (Singapore)</p>
             </div>
+          </div>
+          <div className="mt-auto pt-4">
+            <p className="text-xs text-gray-500">Start with our free plan and upgrade anytime</p>
           </div>
         </div>
-
       </div>
 
-      <div className='flex flex-col gap-1'>
-        <label htmlFor='title' className='text-gray-700 font-medium'>Region</label>
+      <div className='flex flex-col gap-2'>
+        <label htmlFor='region' className='text-gray-700 font-medium text-sm'>Region</label>
         <div className="relative">
           <Input
             disabled
             type='text'
-            className="font-mono text-sm bg-secondary/50"
+            className="font-mono text-sm bg-gray-100 text-gray-600 border-gray-200 cursor-not-allowed"
             value="SouthEast Asia (Singapore)"
             readOnly
           />
         </div>
       </div>
 
-      <div className="mt-4 flex flex-row justify-end ">
-        <Button type='submit' disabled={!isDirty || !isValid || isSubmitting} className="bg-custome-pink disabled:opacity-80 w-full md:max-w-40 justify-center text-white px-8 py-2 rounded-lg font-semibold flex items-center gap-2 hover:bg-custome-pink/90 transition-colors">
-          Create App
+      <div className="mt-6 flex justify-end">
+        <Button
+          type='submit'
+          disabled={!isDirty || !isValid || isSubmitting}
+          className="bg-pink-600 hover:bg-pink-700 disabled:opacity-70 w-full md:w-auto justify-center text-white px-6 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-colors shadow-sm hover:shadow-md"
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Creating...
+            </>
+          ) : (
+            'Create App'
+          )}
         </Button>
       </div>
     </form>

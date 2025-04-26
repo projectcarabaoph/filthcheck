@@ -16,3 +16,17 @@ const domainSchema = z.object({
 export const allowedDomainsSchema = z.object({
     domains: z.array(domainSchema)
 });
+
+
+
+export const newProjectSchema = z.object({
+    title: z.
+        string()
+        .min(1, { message: "Title is required." })
+        .max(50, { message: 'Title cannot exceed 50 characters.' }),
+    description: z
+        .string()
+        .min(1, { message: "Description is required." })
+        .max(200, { message: 'Description cannot exceed 200 characters.' }),
+})
+
