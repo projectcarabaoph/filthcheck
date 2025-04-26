@@ -1,8 +1,8 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Settings } from "lucide-react";
+// import { Settings } from "lucide-react";
 
 import type { TAppCard } from "@/app/home/(dashboard)/_types";
 
@@ -13,7 +13,7 @@ import {
     CardHeader,
     CardTitle
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { replacePlaceholders } from '@/utils/misc/replace-placeholder';
 import paths from '@/utils/paths/paths.config';
 
@@ -21,11 +21,11 @@ export default function AppCard({ data }: { data: TAppCard }) {
 
     const { title, description, plan, pattern, project_code } = data
 
-    const router = useRouter()
+    // const router = useRouter()
 
-    const handleOnClick = (url: string) => {
-        router.push(url)
-    }
+    // const handleOnClick = (url: string) => {
+    //     router.push(url)
+    // }
 
     const newUrl = replacePlaceholders(paths.app.project, { project_code })
 
