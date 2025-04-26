@@ -1,0 +1,72 @@
+
+#### Introduction
+FilthCheck is a simple API for detecting Not Safe For Work (NSFW) Nudity image content. It utilizes ONNX models to analyze images for nudity and classifies them as either Safe or Not Safe For Work (NSFW).
+
+**This is not an npm library.**
+
+You know how most traditional packages libraries work: you install a package from NPM, import the package, and use them in your app.
+
+## API Endpoints
+
+### Detect NSFW Nudity Content
+
+**POST** `https://filthcheck-api.onrender.com/api/detect/image`
+
+
+    const url = 'https://filthcheck-api.onrender.com/api/detect/image'
+    const imageURL = "Your image url here"
+    const imageURL = "Your apiKey here"
+ 
+    **Note:** Do not expose your api key, best practice to put it in your .env file.  
+
+    try {
+	     const response = await fetch(url, {
+	     method: 'POST',
+	     headers: {
+	    'Content-Type': 'application/json',
+	     Accept: 'application/json',
+	    'X-FilthCheckAPI-Key': apiKey
+	     },
+	    body:  JSON.stringify({ imageURL }),
+    })
+    
+        const data = await response.json()
+        
+        if (!response.ok) {
+            throw new Error(data.message)
+        }
+
+        console.log(data)
+
+    } catch (error) {
+	   console.log(error)
+    } 
+
+#### Request Body
+```json
+{
+  "imageURL": "https://example.com/image.jpg"
+}
+```
+
+#### Response
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "label": "nsfw",
+      "score": 0.7899982333183289
+    },
+    {
+      "label": "sfw",
+      "score": 0.21000179648399353
+    }
+  ]
+}
+```
+
+
+
+
+
