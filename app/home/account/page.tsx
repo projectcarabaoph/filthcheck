@@ -7,7 +7,7 @@ import {
     AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+// import { Button } from "@/components/ui/button"
 
 const Account = () => {
 
@@ -47,7 +47,7 @@ const Account = () => {
                         <span className="text-sm">{user.user_metadata.email}</span>
                     </div>
                 </div>
-                <div className="flex flex-col gap-2 p-2">
+                {/* <div className="flex flex-col gap-2 p-2">
                     <div>
                         <h2 className="text-md  font-bold text-gray-900">Danger Zone</h2>
                         <hr />
@@ -63,7 +63,7 @@ const Account = () => {
                             </Button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
