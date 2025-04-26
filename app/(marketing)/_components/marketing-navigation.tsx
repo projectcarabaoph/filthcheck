@@ -7,9 +7,12 @@ import { Menu, X } from 'lucide-react';
 import paths from '@/utils/paths/paths.config';
 import { AvatarHolderSvg } from '@/public/assets/svgs';
 import useScreenSize from '@/hooks/use-screen-size';
+import type { IMarketingNavigation } from '@/app/(marketing)/_types';
 
-const MarketingNavigation = () => {
 
+const MarketingNavigation = ({ user }: IMarketingNavigation) => {
+
+    console.log(user)
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const { width } = useScreenSize()
@@ -36,8 +39,10 @@ const MarketingNavigation = () => {
 
                     <div className="hidden sm:ml-6 sm:flex sm:items-center">
                         <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                            <Link href={paths.auth.signIn} className='p-2 rounded-md bg-custome-pink hover:bg-custome-pink/90 text-white
-                             '>Sign In</Link>
+
+                            <Link href={user?.id ? paths.app.home : paths.auth.signIn} className='p-2 rounded-md bg-custome-pink hover:bg-custome-pink/90 text-white '>
+                                {user?.id ? 'Dashboard' : 'Sign In'}
+                            </Link>
                         </div>
                     </div>
 
@@ -67,8 +72,8 @@ const MarketingNavigation = () => {
                     <div className="pt-4 pb-3 border-t border-gray-200">
 
                         <div className=" space-y-1  px-2">
-                            <Link href={paths.auth.signIn} className="block w-full text-center p-2 rounded-md border border-custome-pink bg-white text-custome-pink hover:bg-custome-pink hover:text-white">
-                                Sign In
+                            <Link href={user?.id ? paths.app.home : paths.auth.signIn} className="block w-full text-center p-2 rounded-md border border-custome-pink bg-white text-custome-pink hover:bg-custome-pink hover:text-white">
+                                {user?.id ? 'Dashboard' : 'Sign In'}
                             </Link>
                         </div>
                     </div>
