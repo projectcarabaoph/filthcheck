@@ -14,4 +14,10 @@ export const homeNavLinks: THomeNavlinks[] = [
         icon: 'fluent:person-24-regular',
         path: paths.app.account
     },
+    {
+        id: 3,
+        title: 'Docs',
+        icon: 'material-symbols-light:docs-outline',
+        path: paths.documentation.docs
+    },
 ]
