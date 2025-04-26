@@ -7,8 +7,6 @@ export default async function MarketingNavigationContainer() {
 
     const { data: { user } } = await supabase.auth.getUser()
 
-
-    console.log("asd", user)
     return (
         <MarketingNavigation user={user as IUserData} />
     )

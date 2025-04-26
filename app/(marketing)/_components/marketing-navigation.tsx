@@ -12,7 +12,6 @@ import type { IMarketingNavigation } from '@/app/(marketing)/_types';
 
 const MarketingNavigation = ({ user }: IMarketingNavigation) => {
 
-    console.log(user)
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const { width } = useScreenSize()
