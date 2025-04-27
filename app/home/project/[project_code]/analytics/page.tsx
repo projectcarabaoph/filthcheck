@@ -11,29 +11,35 @@ const Analytics = async (props: { params: IAnalytics }) => {
 
     const { project_code } = await props.params;
 
+
     const supabase = await serverClient()
 
     let projectQuery = supabase
         .from('projects')
         .select('project_code')
 
+
     if (project_code) {
         projectQuery = projectQuery.eq('project_code', project_code);
     }
 
-    const { data: projectData, error: projectError } = await projectQuery;
+    const { data: projectData, error: projectError } = await projectQuery.single<IApiRequest>();
 
+    if (!project_code || projectError) notFound()
 
-    if (projectError || project_code && (projectData.length === 0)) notFound()
-
-
-    const { data: analyticData, error: analyticError } = await supabase
+    let analyticsQuery = supabase
         .from('analytics')
         .select('*')
-        .eq('project_code', projectData)
 
 
-    if (!project_code || analyticError) notFound()
+    if (projectData.project_code) {
+        analyticsQuery = analyticsQuery.eq('project_code', projectData.project_code);
+    }
+
+    const { data: analyticData, error: analyticError } = await analyticsQuery;
+
+
+    if (!projectData.project_code || analyticError) notFound()
 
     return (
         <div className=" flex flex-col items-center  gap-2 ">
