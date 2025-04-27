@@ -29,7 +29,6 @@ const Project = async (props: { params: IProject }) => {
     if (!project_code || projectError) notFound()
 
 
-
     let apiKeyQuery = supabase
         .from('api_keys')
         .select('*')
@@ -40,8 +39,10 @@ const Project = async (props: { params: IProject }) => {
 
     const { data: apiKeyData, error: apieKeyError } = await apiKeyQuery.single<TApiKeys>();
 
+    const { api_key, project_id, domains } = apiKeyData as TApiKeys
 
-    const { api_key, project_id, domains } = apiKeyData
+    if (!projectData.project_code || apieKeyError) notFound()
+
 
     const domainList = domains ? domains.split(',') : []
 
