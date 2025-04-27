@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { serverClient } from "@/utils/supabase/server-client";
 
-import type { IProject, TApiKeys } from "@/app/home/project/_types";
+import type { IApiRequest, IProject, TApiKeys } from "@/app/home/project/_types";
 
 import ApiKeyCard from "@/app/home/project/[project_code]/_components/api-key-card";
 import TestApiCard from "@/app/home/project/[project_code]/_components/test-api-card";
@@ -12,27 +12,34 @@ const Project = async (props: { params: IProject }) => {
 
     const { project_code } = await props.params;
 
+
     const supabase = await serverClient()
 
     let projectQuery = supabase
         .from('projects')
         .select('project_code')
 
+
     if (project_code) {
         projectQuery = projectQuery.eq('project_code', project_code);
     }
 
-    const { data: projectData, error: projectError } = await projectQuery;
+    const { data: projectData, error: projectError } = await projectQuery.single<IApiRequest>();
 
-    if (projectError || project_code && (projectData.length === 0)) notFound()
+    if (!project_code || projectError) notFound()
 
-    const { data: apiKeyData, error: apiKeyError } = await supabase
+
+
+    let apiKeyQuery = supabase
         .from('api_keys')
         .select('*')
-        .eq('project_code', project_code)
-        .single<TApiKeys>()
 
-    if (apiKeyError) notFound()
+    if (projectData.project_code) {
+        apiKeyQuery = apiKeyQuery.eq('project_code', projectData.project_code);
+    }
+
+    const { data: apiKeyData, error: apieKeyError } = await apiKeyQuery.single<TApiKeys>();
+
 
     const { api_key, project_id, domains } = apiKeyData
 
