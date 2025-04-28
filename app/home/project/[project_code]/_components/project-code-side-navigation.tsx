@@ -31,6 +31,12 @@ export default function ProjectCodeSideNavigation({ project_code }: { project_co
             icon: 'fluent:data-usage-16-regular',
             path: newPathAnalytics
         },
+        {
+            id: 3,
+            title: 'Docs',
+            icon: 'material-symbols-light:docs-outline',
+            path: paths.documentation.docs
+        },
     ]
 
     return (
