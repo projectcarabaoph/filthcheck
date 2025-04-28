@@ -10,6 +10,8 @@ import type { IDocsContainer } from '@/app/docs/_types';
 
 export default function DocsContainer({ markdownText, user }: IDocsContainer) {
 
+    console.log('user', user)
+
     return (
         <div className="bg-white max-w-4xl h-auto flex flex-col justify-center items-center rounded-md p-4 mx-auto">
             <div
@@ -21,7 +23,7 @@ export default function DocsContainer({ markdownText, user }: IDocsContainer) {
                 </ReactMarkdown>
             </div>
             <div className='flex flex-row justify-between'>
-                <Link className='text-md hover:underline' href={user.id ? paths.app.home : paths.marketing.landing}>
+                <Link className='text-md hover:underline' href={user ? paths.app.home : paths.marketing.landing}>
                     Go back
                 </Link>
             </div>
