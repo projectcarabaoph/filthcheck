@@ -10,8 +10,6 @@ import type { IDocsContainer } from '@/app/docs/_types';
 
 export default function DocsContainer({ markdownText, user }: IDocsContainer) {
 
-    console.log('user', user)
-
     return (
         <div className="bg-white max-w-4xl h-auto flex flex-col justify-center items-center rounded-md p-4 mx-auto">
             <div
