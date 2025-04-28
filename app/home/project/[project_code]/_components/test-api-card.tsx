@@ -76,11 +76,9 @@ export default function TestApiCard({
                 </form>
                 <div className="flex flex-col gap-2 mt-2">
                     <p>Output:</p>
-                    <pre className="bg-neutral-50 outline outline-[1px] outline-neutral-200 rounded-md p-2">
+                    <pre className="bg-neutral-50 outline outline-[1px] outline-neutral-200 rounded-md p-2 overflow-x-auto max-w-full">
                         {isLoading ? <span>Loading...</span> : <code>{JSON.stringify(output, null, 2)}</code>}
                     </pre>
-
-
                     <p className="text-sm text-neutral-600">
                         Response time: {responseTime !== null ? `${(responseTime / 1000).toFixed(2)}s` : "0"}
                     </p>
