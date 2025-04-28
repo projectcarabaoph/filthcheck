@@ -117,10 +117,6 @@ export default function AnalyticsRequestTable({
                                         <span className="lg:hidden font-bold">Response Time: </span>
                                         {formatResponseTime(request.response_time_ms)}
                                     </TableCell>
-                                    <TableCell className="p-3 flex justify-between lg:table-cell text-muted-foreground text-sm" data-label="IP Address">
-                                        <span className="lg:hidden font-bold">Response Time: </span>
-                                        {request.ip_address}
-                                    </TableCell>
 
                                     <TableCell className="p-3 flex justify-between lg:table-cell text-right text-muted-foreground text-sm" data-label="Timestamp">
                                         <span className="lg:hidden font-bold">Timestamp: </span>
@@ -130,7 +126,7 @@ export default function AnalyticsRequestTable({
                             )}
                             empty={
                                 <TableRow>
-                                    <TableCell colSpan={7} className="h-24 text-center">
+                                    <TableCell colSpan={6} className="h-24 text-center">
                                         No API requests found.
                                     </TableCell>
                                 </TableRow>
