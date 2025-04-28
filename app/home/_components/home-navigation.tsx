@@ -51,7 +51,7 @@ export default function HomeNavigation() {
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
                         <div className="flex-shrink-0 flex items-center">
-                            <Link href={paths.marketing.landing} className="flex flex-row gap-2 items-center justify-center text-xl font-bold text-gray-900">
+                            <Link href={user.id ? paths.app.home : paths.marketing.landing} className="flex flex-row gap-2 items-center justify-center text-xl font-bold text-gray-900">
                                 <AvatarHolderSvg className="h-8 w-8" />
                                 <span>FilthCheck</span>
                             </Link >
