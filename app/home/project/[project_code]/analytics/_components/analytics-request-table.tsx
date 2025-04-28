@@ -81,7 +81,6 @@ export default function AnalyticsRequestTable({
                                 <TableHead>Method</TableHead>
                                 <TableHead>Status</TableHead>
                                 <TableHead>Response Time</TableHead>
-                                <TableHead>IP Address</TableHead>
                                 <TableHead className="text-right">Timestamp</TableHead>
                             </TableRow>
                         </TableHeader>
