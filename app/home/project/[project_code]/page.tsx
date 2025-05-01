@@ -58,7 +58,7 @@ const Project = async (props: { params: IProject }) => {
                 <div className="flex flex-col gap-2 py-2">
                     <ApiKeyCard apiKey={api_key} />
                     <AllowedDomainsCard domains={domainList} project_id={project_id} />
-                    <TestApiCard apiKey={api_key} />
+                    <TestApiCard domains={domainList} apiKey={api_key} />
                 </div>
             </div>
         </div>

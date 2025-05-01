@@ -16,9 +16,11 @@ import { Input } from "@/components/ui/input";
 import type { TTestApiCard, TTestApiCardSchema } from "@/app/home/project/_types";
 import { testApiCardSchema } from "@/app/home/project/_lib/schemas";
 import { usePostImage } from "@/hooks/use-post-image";
+import { toast } from "sonner";
 
 
 export default function TestApiCard({
+    domains,
     apiKey = ""
 }: TTestApiCard) {
 
@@ -42,6 +44,9 @@ export default function TestApiCard({
     }
 
     const onSubmit = (formData: TTestApiCardSchema) => {
+        if (!domains.length || domains.length === 0) {
+            toast.error('Please provide allowed domains.')
+        }
         postImage(formData.imageURL)
     }
 
