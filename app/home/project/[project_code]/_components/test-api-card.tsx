@@ -44,8 +44,13 @@ export default function TestApiCard({
     }
 
     const onSubmit = (formData: TTestApiCardSchema) => {
-        if (!domains.length || domains.length === 0) {
+        const isEmpty = Array.isArray(domains) &&
+            domains.length === 2 &&
+            domains.every(domain => domain === '');
+
+        if (isEmpty) {
             toast.error('Please provide allowed domains.')
+            return
         }
         postImage(formData.imageURL)
     }
