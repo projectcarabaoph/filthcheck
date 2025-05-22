@@ -17,7 +17,7 @@ export function usePostImage(apiKey: string) {
         startTimer()
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/detect/image`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/detect`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

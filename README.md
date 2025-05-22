@@ -25,7 +25,7 @@ FilthCheck is a simple API for detecting Not Safe For Work (NSFW) Nudity image c
 
 ### Detect NSFW Content
 
-**POST** `/api/detect/image`
+**POST** `/api/detect`
 
 #### Request
 ```json

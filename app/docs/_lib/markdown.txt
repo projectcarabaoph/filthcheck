@@ -10,10 +10,10 @@ You know how most traditional packages libraries work: you install a package fro
 
 ### Detect NSFW Nudity Content
 
-**POST** `https://filthcheck-api.onrender.com/api/detect/image`
+**POST** `https://filthcheck-api.onrender.com/api/detect`
 
 
-    const url = 'https://filthcheck-api.onrender.com/api/detect/image'
+    const url = 'https://filthcheck-api.onrender.com/api/detect'
     const imageURL = "Your image url here"
     const imageURL = "Your apiKey here"
  
