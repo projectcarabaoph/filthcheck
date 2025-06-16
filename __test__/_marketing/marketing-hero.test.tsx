@@ -10,7 +10,6 @@ jest.mock("@/utils/supabase/server-client", () => ({
     serverClient: jest.fn(),
 }))
 
-
 describe("MarketingHero SSR", () => {
     it("renders 'Get Started' link to sign-in page when user is not logged in", async () => {
         ; (serverClient as jest.Mock).mockResolvedValue({
